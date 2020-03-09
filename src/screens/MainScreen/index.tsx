@@ -7,9 +7,7 @@ const MainScreen: FC = () => (
     <Box background="white">
       <TextInput placeholder="Search..." />
     </Box>
-    <Button primary alignSelf="stretch">
-      Go!
-    </Button>
+    <Button primary label="Go!" />
   </Box>
 )
 
