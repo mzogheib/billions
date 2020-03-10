@@ -1,5 +1,7 @@
 import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
-import { Box, TextInput, Button, Text, Form } from 'grommet'
+import { Box, TextInput, Button, Form } from 'grommet'
+
+import TextLogo from '../../components/TextLogo'
 
 const MainScreen: FC = () => {
   const [searchTerm, setSearchTerm] = useState()
@@ -25,7 +27,7 @@ const MainScreen: FC = () => {
     <Box fill pad="large" justify="center" align="center">
       <Form onSubmit={handleSubmit}>
         <Box gap="xlarge" align="center">
-          <Text size="xxlarge">Geenious</Text>
+          <TextLogo size="xxlarge" />
           <Box background="white">
             <TextInput placeholder="Search..." onChange={handleInputChange} />
           </Box>
