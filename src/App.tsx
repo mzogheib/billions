@@ -1,11 +1,14 @@
-import React from 'react'
-import './App.css'
+import React, { FC } from 'react'
+import { Grommet } from 'grommet'
+import { grommet } from 'grommet/themes'
 
-function App() {
+import MainScreen from './screens/MainScreen'
+
+const App: FC = () => {
   return (
-    <div className="App">
-      <header className="App-header"></header>
-    </div>
+    <Grommet theme={grommet} background="light-1" full>
+      <MainScreen />
+    </Grommet>
   )
 }
 
