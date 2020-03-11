@@ -11,3 +11,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Add React Playroom
 - Add Storybook
 - Split into monorepo so that Playroom and Storybook are in separate packages
+
+## Random things
+- Should each screen specify padding or should it be global in a root Box?
