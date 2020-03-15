@@ -4,12 +4,15 @@ import { grommet } from 'grommet/themes'
 
 import MainScreen from './screens/MainScreen'
 import Search from './screens/Search'
+import ScreenWrapper from './components/ScreenWrapper'
 
 const App: FC = () => {
   return (
     <Grommet theme={grommet} background="light-1" full>
       {/* <MainScreen /> */}
-      <Search />
+      <ScreenWrapper>
+        <Search />
+      </ScreenWrapper>
     </Grommet>
   )
 }

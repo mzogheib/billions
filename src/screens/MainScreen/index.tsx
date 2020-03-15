@@ -4,7 +4,7 @@ import { Box, TextInput, Button, Form } from 'grommet'
 import TextLogo from '../../components/TextLogo'
 
 const MainScreen: FC = () => {
-  const [searchTerm, setSearchTerm] = useState()
+  const [searchTerm, setSearchTerm] = useState<string | undefined>()
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const inputValue = e.target.value
