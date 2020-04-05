@@ -1,35 +1,20 @@
 import React, { FC } from 'react'
-import { Box, Button } from 'grommet'
-import { Previous } from 'grommet-icons'
+import { useHistory } from 'react-router-dom'
 
-import TextLogo from '../TextLogo'
+import ScreenWrapperComponent from './component'
 
 interface Props {
   children: React.ReactNode
 }
 
-const ScreenWrapper: FC<Props> = ({ children }: Props) => (
-  <Box>
-    <Box
-      as="header"
-      direction="row"
-      justify="between"
-      align="center"
-      height="xxsmall"
-    >
-      <Box basis="1/3" align="start">
-        <Button
-          icon={<Previous color="brand" />}
-          onClick={(): void => console.log('go back')}
-        />
-      </Box>
-      <Box basis="1/3" justify="center" direction="row">
-        <TextLogo size="xxsmal" />
-      </Box>
-      <Box basis="1/3" />
-    </Box>
-    {children}
-  </Box>
-)
+const ScreenWrapper: FC<Props> = ({ children }: Props) => {
+  const history = useHistory()
+
+  return (
+    <ScreenWrapperComponent onBack={(): void => history.goBack()}>
+      {children}
+    </ScreenWrapperComponent>
+  )
+}
 
 export default ScreenWrapper
