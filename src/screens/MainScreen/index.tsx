@@ -1,10 +1,14 @@
 import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
 import { Box, TextInput, Button, Form } from 'grommet'
+import { useHistory } from 'react-router-dom'
 
+import { makeQueryParams } from '../../utils/routerUtils'
 import TextLogo from '../../components/TextLogo'
 
 const MainScreen: FC = () => {
   const [searchTerm, setSearchTerm] = useState<string | undefined>()
+
+  const { push } = useHistory()
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const inputValue = e.target.value
@@ -18,7 +22,10 @@ const MainScreen: FC = () => {
 
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault()
-    console.log(searchTerm)
+
+    if (!searchTerm) return
+
+    push(`/search?${makeQueryParams({ query: searchTerm })}`)
   }
 
   const isButtonVisible = searchTerm && searchTerm.length

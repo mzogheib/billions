@@ -1,9 +1,16 @@
 import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
 import { Box, TextInput, Button, Form, Tabs, Tab } from 'grommet'
 import { Search as SearchIcon } from 'grommet-icons'
+import { useHistory } from 'react-router-dom'
+
+import { useQuery, makeQueryParams } from '../../utils/routerUtils'
 
 const Search: FC = () => {
-  const [searchTerm, setSearchTerm] = useState<string | undefined>()
+  const { query } = useQuery()
+  const { replace } = useHistory()
+  const [searchTerm, setSearchTerm] = useState<string | undefined>(
+    query as string // It's safe to assume it will only be a string
+  )
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const inputValue = e.target.value
@@ -17,14 +24,20 @@ const Search: FC = () => {
 
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault()
-    console.log(searchTerm)
+    if (!searchTerm) return
+
+    replace(`/search?${makeQueryParams({ query: searchTerm })}`)
   }
 
   return (
     <Box fill>
       <Form onSubmit={handleSubmit}>
         <Box direction="row" align="center" gap="small" pad="medium">
-          <TextInput placeholder="Search..." onChange={handleInputChange} />
+          <TextInput
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={handleInputChange}
+          />
           <Button primary type="submit" icon={<SearchIcon />} />
         </Box>
       </Form>
