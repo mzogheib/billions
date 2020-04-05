@@ -10,9 +10,9 @@ interface Props {
 }
 
 const ScreenWrapper: FC<Props> = ({ children }: Props) => {
-  const history = useHistory()
+  const { goBack } = useHistory()
 
-  const handleClickBack = (): void => history.goBack()
+  const handleClickBack = (): void => goBack()
 
   return (
     <Box>
