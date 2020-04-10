@@ -3,6 +3,7 @@ import { Box, TextInput, Button, Form } from 'grommet'
 import { useHistory } from 'react-router-dom'
 
 import { makeQueryParams } from '../../utils/routerUtils'
+import { getAccessToken } from '../../services/genius'
 import TextLogo from '../../components/TextLogo'
 
 const MainScreen: FC = () => {
@@ -10,7 +11,8 @@ const MainScreen: FC = () => {
 
   const { push } = useHistory()
 
-  const isConnected = true
+  const accessToken = getAccessToken()
+  const isConnected = !!accessToken
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const inputValue = e.target.value
