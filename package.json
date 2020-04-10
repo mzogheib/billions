@@ -27,6 +27,16 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "if [[ $(git rev-parse --abbrev-ref HEAD) = master ]]; then ([[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS); fi"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
