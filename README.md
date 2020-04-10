@@ -12,6 +12,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - They are enforced via [commitlint](https://github.com/conventional-changelog/commitlint) on the `master` branch.
 - GitHub enforces PR titles also follow this specification.
 
+## Releases & Changelog
+
+- Based on the commit messages [standard-version](https://github.com/conventional-changelog/standard-version) is used to bump version and generate the changelog
+
+```bash
+yarn release
+```
+
 ## TODO
 
 - Add React Playroom
