@@ -10,6 +10,8 @@ const MainScreen: FC = () => {
 
   const { push } = useHistory()
 
+  const isConnected = true
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const inputValue = e.target.value
 
@@ -35,9 +37,12 @@ const MainScreen: FC = () => {
       <Form onSubmit={handleSubmit}>
         <Box gap="xlarge" align="center">
           <TextLogo size="xxlarge" />
-          <Box background="white">
-            <TextInput placeholder="Search..." onChange={handleInputChange} />
-          </Box>
+          {isConnected && (
+            <Box background="white">
+              <TextInput placeholder="Search..." onChange={handleInputChange} />
+            </Box>
+          )}
+          {!isConnected && <Button primary label="Connect to Genius" />}
           <Box basis="xsmall" width="small">
             {isButtonVisible && <Button primary type="submit" label="Go!" />}
           </Box>
