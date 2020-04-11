@@ -123,6 +123,6 @@ export const onOAuthResponse = (
   }
 
   window.opener.geeniousOnOAuthResponse(response)
-  delete window.opener.geeniusOnOAuthResponse
+  delete window.opener.geeniousOnOAuthResponse
   window.close()
 }
