@@ -13,8 +13,6 @@ const OAuth: FC = () => {
     console.error(message)
   }
 
-  // Pass through any error messages to the settings page, which is where
-  // the user would have started to get here
   onOAuthResponse(parsedQueryParams, handleError)
 
   return (
