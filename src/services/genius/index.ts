@@ -27,9 +27,8 @@ const makeAuthUrl = (token: string): string => {
 
   /* eslint-disable @typescript-eslint/camelcase */
   const params = {
-    client_id:
-      'M0kVySiz7a5uFc6m7-1uapKvDZsLg7EGusZ9tFzSbu0mbFwG_IyYxj6izrpoEcY5',
-    redirect_uri: 'http://localhost:3000/oauth',
+    client_id: process.env.REACT_APP_GENIUS_CLIENT_ID as string,
+    redirect_uri: process.env.REACT_APP_GENIUS_REDIRECT_URI as string,
     response_type: 'token',
     scope: 'me',
     state: encode({ token }),
