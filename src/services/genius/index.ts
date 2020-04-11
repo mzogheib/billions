@@ -25,14 +25,16 @@ export const hasAccessToken = (): boolean => !!getAccessToken()
 const makeAuthUrl = (token: string): string => {
   const baseUrl = 'https://api.genius.com/oauth/authorize'
 
+  /* eslint-disable @typescript-eslint/camelcase */
   const params = {
-    ['client_id']:
+    client_id:
       'M0kVySiz7a5uFc6m7-1uapKvDZsLg7EGusZ9tFzSbu0mbFwG_IyYxj6izrpoEcY5',
-    ['redirect_uri']: 'http://localhost:3000/oauth',
-    ['response_type']: 'token',
+    redirect_uri: 'http://localhost:3000/oauth',
+    response_type: 'token',
     scope: 'me',
     state: encode({ token }),
   }
+  /* eslint-enable @typescript-eslint/camelcase */
 
   return `${baseUrl}?${makeQueryParams(params)}`
 }
