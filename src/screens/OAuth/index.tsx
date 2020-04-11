@@ -7,8 +7,6 @@ import { useQuery } from '../../utils/routerUtils'
 const OAuth: FC = () => {
   const parsedQueryParams = useQuery({ hash: true }) as GeniusOAuthResponse
 
-  console.log('OAuth', parsedQueryParams)
-
   const handleError = (message: string): void => {
     console.error(message)
   }
