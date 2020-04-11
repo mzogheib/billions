@@ -3,16 +3,15 @@ import { Box, TextInput, Button, Form } from 'grommet'
 import { useHistory } from 'react-router-dom'
 
 import { makeQueryParams } from '../../utils/routerUtils'
-import { getAccessToken } from '../../services/genius'
+import { hasAccessToken, openAuthPage } from '../../services/genius'
 import TextLogo from '../../components/TextLogo'
 
 const MainScreen: FC = () => {
   const [searchTerm, setSearchTerm] = useState<string | undefined>()
-
+  const [isConnected, setConnected] = useState<boolean>(hasAccessToken())
   const { push } = useHistory()
 
-  const accessToken = getAccessToken()
-  const isConnected = !!accessToken
+  // TODO: if isConnected, check if the accessToken is still valid
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const inputValue = e.target.value
@@ -32,6 +31,18 @@ const MainScreen: FC = () => {
     push(`/search?${makeQueryParams({ query: searchTerm })}`)
   }
 
+  const handleConnect = (): void => {
+    const onSuccess = (): void => {
+      setConnected(true)
+    }
+
+    const onError = (message: string): void => {
+      console.error(message)
+    }
+
+    openAuthPage({ onSuccess, onError })
+  }
+
   const isButtonVisible = searchTerm && searchTerm.length
 
   return (
@@ -44,7 +55,9 @@ const MainScreen: FC = () => {
               <TextInput placeholder="Search..." onChange={handleInputChange} />
             </Box>
           )}
-          {!isConnected && <Button primary label="Connect to Genius" />}
+          {!isConnected && (
+            <Button primary label="Connect to Genius" onClick={handleConnect} />
+          )}
           <Box basis="xsmall" width="small">
             {isButtonVisible && <Button primary type="submit" label="Go!" />}
           </Box>
