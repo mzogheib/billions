@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
+import React, { FC, useState, FormEvent, ChangeEvent, useEffect } from 'react'
 import { Box, TextInput, Button, Form, Tabs, Tab } from 'grommet'
 import { Search as SearchIcon } from 'grommet-icons'
 import { useHistory } from 'react-router-dom'
@@ -12,6 +12,16 @@ const Search: FC = () => {
     query as string // It's safe to assume it will only be a string
   )
 
+  const handleSearch = (): void => {
+    if (!searchTerm || searchTerm === query) return
+
+    // TODO: This should probably be in a parent so that this component remains
+    // as a pure UI component
+    replace(`/search?${makeQueryParams({ query: searchTerm })}`)
+  }
+
+  useEffect(handleSearch, [])
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const inputValue = e.target.value
 
@@ -24,9 +34,7 @@ const Search: FC = () => {
 
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault()
-    if (!searchTerm) return
-
-    replace(`/search?${makeQueryParams({ query: searchTerm })}`)
+    handleSearch()
   }
 
   return (
