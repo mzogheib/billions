@@ -18,7 +18,8 @@ declare global {
 const setAccessToken = (token: string): void =>
   storage.set('accessToken', token)
 
-const getAccessToken = (): string | undefined => storage.get('accessToken')
+export const getAccessToken = (): string | undefined =>
+  storage.get('accessToken')
 
 export const hasAccessToken = (): boolean => !!getAccessToken()
 
