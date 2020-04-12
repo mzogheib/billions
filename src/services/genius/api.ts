@@ -1,6 +1,7 @@
 type SearchResponse = {
   meta: {
     status: number
+    message?: string
   }
   response: {
     hits: { foo: string }[]
