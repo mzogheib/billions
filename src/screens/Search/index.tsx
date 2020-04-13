@@ -1,16 +1,27 @@
-import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
+import React, { FC, useState, FormEvent, ChangeEvent, useEffect } from 'react'
 import { Box, TextInput, Button, Form, Tabs, Tab } from 'grommet'
 import { Search as SearchIcon } from 'grommet-icons'
 import { useHistory } from 'react-router-dom'
 
 import { useQuery, makeQueryParams } from '../../utils/routerUtils'
+import { search } from '../../services/genius'
+
+const handleSearch = async (query: string): Promise<void> => {
+  if (!query) return
+
+  const newSearchResults = await search({ query })
+
+  console.log(newSearchResults)
+}
 
 const Search: FC = () => {
-  const { query } = useQuery()
+  const { query } = useQuery() as { query: string } // It's safe to assume it will only be a string
   const { replace } = useHistory()
-  const [searchTerm, setSearchTerm] = useState<string | undefined>(
-    query as string // It's safe to assume it will only be a string
-  )
+  const [searchTerm, setSearchTerm] = useState<string | undefined>(query)
+
+  useEffect(() => {
+    handleSearch(query)
+  }, [query])
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const inputValue = e.target.value
@@ -24,8 +35,9 @@ const Search: FC = () => {
 
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault()
-    if (!searchTerm) return
-
+    if (!searchTerm || searchTerm === query) return
+    // TODO: This should probably be in a parent so that this component remains
+    // as a pure UI component
     replace(`/search?${makeQueryParams({ query: searchTerm })}`)
   }
 
