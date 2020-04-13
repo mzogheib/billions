@@ -4,14 +4,11 @@ import { Search as SearchIcon } from 'grommet-icons'
 import { useHistory } from 'react-router-dom'
 
 import { useQuery, makeQueryParams } from '../../utils/routerUtils'
-import { search } from '../../services/genius'
 
 const handleSearch = async (query: string): Promise<void> => {
   if (!query) return
 
-  const newSearchResults = await search({ query })
-
-  console.log(newSearchResults)
+  console.log('Searching for:', query)
 }
 
 const Search: FC = () => {
