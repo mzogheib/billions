@@ -1,11 +1,22 @@
 import { SimpleKeyValue } from '../typescript'
 
-export const makeRandomString = (): string =>
+interface MakeRandomString {
+  (): string
+}
+
+export const makeRandomString: MakeRandomString = () =>
   Math.random()
     .toString(36)
     .substr(2)
 
-export const encode = (obj: SimpleKeyValue): string => btoa(JSON.stringify(obj))
+interface Encode {
+  (obj: SimpleKeyValue): string
+}
 
-export const decode = (string: string): SimpleKeyValue =>
-  JSON.parse(atob(string))
+export const encode: Encode = obj => btoa(JSON.stringify(obj))
+
+interface Decode {
+  (string: string): SimpleKeyValue
+}
+
+export const decode: Decode = string => JSON.parse(atob(string))
