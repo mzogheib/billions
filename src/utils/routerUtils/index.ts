@@ -1,11 +1,12 @@
 import { useLocation } from 'react-router-dom'
 import { parse, ParsedQuery, stringify } from 'query-string'
+import { SimpleKeyValue } from '../typescript'
 
 interface UseQuery {
-  hash?: boolean
+  (options?: { hash?: boolean }): ParsedQuery
 }
 
-export const useQuery = (options?: UseQuery): ParsedQuery => {
+export const useQuery: UseQuery = options => {
   const location = useLocation()
 
   const shouldParseHash = options && options.hash
@@ -14,6 +15,8 @@ export const useQuery = (options?: UseQuery): ParsedQuery => {
   return parse(stringToParse)
 }
 
-export const makeQueryParams = (params: {
-  [key: string]: string | number | boolean
-}): string => stringify(params)
+interface MakeQueryParams {
+  (params: SimpleKeyValue): string
+}
+
+export const makeQueryParams: MakeQueryParams = params => stringify(params)

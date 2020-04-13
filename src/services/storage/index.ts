@@ -1,8 +1,16 @@
 const prefix = 'geenious'
 
-const makeKey = (key: string): string => `${prefix}-${key}`
+interface MakeKey {
+  (key: string): string
+}
 
-const get = (key: string): string | undefined => {
+const makeKey: MakeKey = key => `${prefix}-${key}`
+
+interface Get {
+  (key: string): string | undefined
+}
+
+const get: Get = key => {
   const storedValue = localStorage.getItem(makeKey(key))
 
   if (storedValue === null) return
@@ -10,10 +18,17 @@ const get = (key: string): string | undefined => {
   return storedValue
 }
 
-const set = (key: string, value: string): void =>
-  localStorage.setItem(makeKey(key), value)
+interface Set {
+  (key: string, value: string): void
+}
 
-const remove = (key: string): void => localStorage.removeItem(makeKey(key))
+const set: Set = (key, value) => localStorage.setItem(makeKey(key), value)
+
+interface Remove {
+  (key: string): void
+}
+
+const remove: Remove = key => localStorage.removeItem(makeKey(key))
 
 export default {
   get,
