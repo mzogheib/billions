@@ -1,49 +1,18 @@
-import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
-import { Box, TextInput, Button, Form } from 'grommet'
+import React, { FC } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { makeQueryParams } from '../../utils/routerUtils'
-import TextLogo from '../../components/TextLogo'
+import MainScreenUI from './MainScreenUI'
 
 const MainScreen: FC = () => {
-  const [searchTerm, setSearchTerm] = useState<string | undefined>()
   const { push } = useHistory()
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    const inputValue = e.target.value
-
-    if (inputValue && inputValue.length) {
-      setSearchTerm(inputValue)
-    } else {
-      setSearchTerm(undefined)
-    }
+  const handleSubmit = (newQuery?: string): void => {
+    if (!newQuery) return
+    push(`/search?${makeQueryParams({ query: newQuery })}`)
   }
 
-  const handleSubmit = (e: FormEvent): void => {
-    e.preventDefault()
-
-    if (!searchTerm) return
-
-    push(`/search?${makeQueryParams({ query: searchTerm })}`)
-  }
-
-  const isButtonVisible = searchTerm && searchTerm.length
-
-  return (
-    <Box fill pad="large" justify="center" align="center">
-      <Form onSubmit={handleSubmit}>
-        <Box gap="xlarge" align="center">
-          <TextLogo size="xxlarge" />
-          <Box background="white">
-            <TextInput placeholder="Search..." onChange={handleInputChange} />
-          </Box>
-          <Box basis="xsmall" width="small">
-            {isButtonVisible && <Button primary type="submit" label="Go!" />}
-          </Box>
-        </Box>
-      </Form>
-    </Box>
-  )
+  return <MainScreenUI onSubmit={handleSubmit} />
 }
 
 export default MainScreen
