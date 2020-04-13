@@ -5,8 +5,8 @@ import { Search as SearchIcon } from 'grommet-icons'
 import { SearchResult } from '../../services/discogs'
 
 interface Props {
-  defaultSearchTerm: string
-  onSubmit: (searchTerm?: string) => void
+  defaultSearchTerm?: string
+  onSubmit: (searchTerm: string) => void
   searchResults: SearchResult[]
 }
 
@@ -31,6 +31,9 @@ const SearchUI: FC<Props> = ({
 
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault()
+
+    if (!searchTerm) return
+
     onSubmit(searchTerm)
   }
 
