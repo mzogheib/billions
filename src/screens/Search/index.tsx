@@ -1,27 +1,27 @@
 import React, { FC, useState, FormEvent, ChangeEvent, useEffect } from 'react'
-import { Box, TextInput, Button, Form, Tabs, Tab } from 'grommet'
+import { Box, TextInput, Button, Form } from 'grommet'
 import { Search as SearchIcon } from 'grommet-icons'
 import { useHistory } from 'react-router-dom'
 
 import { useQuery, makeQueryParams } from '../../utils/routerUtils'
-import { search } from '../../services/discogs'
-
-const handleSearch = async (query: string): Promise<void> => {
-  if (!query) return
-
-  const response = await search({ query })
-  const results = response.data.results.map(({ title, type }) => ({
-    title,
-    type,
-  }))
-  console.log('Searching for:', query)
-  console.log('Results:', results)
-}
+import { search, SearchResult } from '../../services/discogs'
 
 const Search: FC = () => {
   const { query } = useQuery() as { query: string } // It's safe to assume it will only be a string
   const { replace } = useHistory()
   const [searchTerm, setSearchTerm] = useState<string | undefined>(query)
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
+
+  const handleSearch = async (query: string): Promise<void> => {
+    if (!query) return
+
+    const response = await search({ query })
+    const results = response.data.results.map(({ title, type }) => ({
+      title,
+      type,
+    }))
+    setSearchResults(results)
+  }
 
   useEffect(() => {
     handleSearch(query)
@@ -58,17 +58,7 @@ const Search: FC = () => {
         </Box>
       </Form>
       <Box pad="medium">
-        <Tabs onActive={(value): void => console.log('clicked: ', value)}>
-          <Tab title="All">
-            <Box pad="medium">All</Box>
-          </Tab>
-          <Tab title="Artists">
-            <Box pad="medium">Artists</Box>
-          </Tab>
-          <Tab title="Songs">
-            <Box pad="medium">Songs</Box>
-          </Tab>
-        </Tabs>
+        <code>{JSON.stringify(searchResults)}</code>
       </Box>
     </Box>
   )
