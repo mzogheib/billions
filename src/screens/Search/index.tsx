@@ -4,11 +4,18 @@ import { Search as SearchIcon } from 'grommet-icons'
 import { useHistory } from 'react-router-dom'
 
 import { useQuery, makeQueryParams } from '../../utils/routerUtils'
+import { search } from '../../services/discogs'
 
 const handleSearch = async (query: string): Promise<void> => {
   if (!query) return
 
+  const response = await search({ query })
+  const results = response.data.results.map(({ title, type }) => ({
+    title,
+    type,
+  }))
   console.log('Searching for:', query)
+  console.log('Results:', results)
 }
 
 const Search: FC = () => {
