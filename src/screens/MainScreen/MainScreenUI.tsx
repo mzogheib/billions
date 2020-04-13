@@ -4,7 +4,7 @@ import { Box, TextInput, Button, Form } from 'grommet'
 import TextLogo from '../../components/TextLogo'
 
 interface Props {
-  onSubmit: (searchTerm?: string) => void
+  onSubmit: (searchTerm: string) => void
 }
 
 const MainScreenUI: FC<Props> = ({ onSubmit }: Props) => {
@@ -22,6 +22,9 @@ const MainScreenUI: FC<Props> = ({ onSubmit }: Props) => {
 
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault()
+
+    if (!searchTerm) return
+
     onSubmit(searchTerm)
   }
 

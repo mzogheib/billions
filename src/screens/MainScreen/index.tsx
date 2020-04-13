@@ -7,9 +7,8 @@ import MainScreenUI from './MainScreenUI'
 const MainScreen: FC = () => {
   const { push } = useHistory()
 
-  const handleSubmit = (newQuery?: string): void => {
-    if (!newQuery) return
-    push(`/search?${makeQueryParams({ query: newQuery })}`)
+  const handleSubmit = (query: string): void => {
+    push(`/search?${makeQueryParams({ query })}`)
   }
 
   return <MainScreenUI onSubmit={handleSubmit} />
