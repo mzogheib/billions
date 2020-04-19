@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Text, Box, Image } from 'grommet'
+import { Disc as DiscIcon } from 'grommet-icons'
 
 export interface Props {
   imageUrl?: string
@@ -16,7 +17,11 @@ const SearchResult: FC<Props> = ({ imageUrl, type, title }: Props) => (
     direction="row"
   >
     <Box width="xxsmall" height="xxsmall">
-      <Image src={imageUrl} fit="contain" />
+      {imageUrl ? (
+        <Image src={imageUrl} fit="contain" />
+      ) : (
+        <DiscIcon size="xsmall" />
+      )}
     </Box>
     <Box justify="center" flex>
       <Text truncate={true}>{title}</Text>
