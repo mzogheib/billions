@@ -6,3 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@font-face {
+  font-family: 'FredokaOne';
+  src: local('FredokaOne'),
+    url(./fonts/FredokaOne-Regular.ttf) format('truetype');
+}
