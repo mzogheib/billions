@@ -1,22 +1,25 @@
 import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
-import { Box, TextInput, Button, Form } from 'grommet'
+import { Box, TextInput, Button, Form, Tabs, Tab } from 'grommet'
 import { Search as SearchIcon } from 'grommet-icons'
 
-import SearchResult, {
-  Props as SearchResultInterface,
-} from '../../../components/SearchResult'
+import SearchResultsList, { SearchResults } from '../SearchResultsList'
 
-// Need an id to add as the key for each list item
-type SearchResults = (SearchResultInterface & { id: number })[]
+export interface OnSubmit {
+  (searchTerm: string): void
+}
 
 interface Props {
   defaultSearchTerm?: string
-  onSubmit: (searchTerm: string) => void
+  onSelectArtists: () => void
+  onSelectReleases: () => void
+  onSubmit: OnSubmit
   searchResults: SearchResults
 }
 
 const SearchUI: FC<Props> = ({
   defaultSearchTerm,
+  onSelectArtists,
+  onSelectReleases,
   onSubmit,
   searchResults,
 }: Props) => {
@@ -42,6 +45,22 @@ const SearchUI: FC<Props> = ({
     onSubmit(searchTerm)
   }
 
+  const tabs = [
+    {
+      title: 'Artists',
+      onSelect: onSelectArtists,
+    },
+    {
+      title: 'Releases',
+      onSelect: onSelectReleases,
+    },
+  ]
+
+  const handleSelectTab = (tabIndex: number): void => {
+    const { onSelect } = tabs[tabIndex]
+    onSelect()
+  }
+
   return (
     <Box fill>
       <Form onSubmit={handleSubmit}>
@@ -54,16 +73,13 @@ const SearchUI: FC<Props> = ({
           <Button primary type="submit" icon={<SearchIcon />} />
         </Box>
       </Form>
-      <Box pad="medium" gap="medium">
-        {searchResults.map(({ id, type, title, imageUrl }) => (
-          <SearchResult
-            key={id}
-            type={type}
-            title={title}
-            imageUrl={imageUrl}
-          />
+      <Tabs onActive={handleSelectTab}>
+        {tabs.map(({ title }) => (
+          <Tab title={title} key={title}>
+            <SearchResultsList results={searchResults} />
+          </Tab>
         ))}
-      </Box>
+      </Tabs>
     </Box>
   )
 }

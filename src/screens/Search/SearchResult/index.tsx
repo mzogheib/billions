@@ -2,15 +2,12 @@ import React, { FC } from 'react'
 import { Text, Box, Image } from 'grommet'
 import { Disc as DiscIcon } from 'grommet-icons'
 
-import Tag from '../Tag'
-
 export interface Props {
   imageUrl?: string
-  type: string
   title: string
 }
 
-const SearchResult: FC<Props> = ({ imageUrl, type, title }: Props) => (
+const SearchResult: FC<Props> = ({ imageUrl, title }: Props) => (
   <Box
     background="white"
     pad="medium"
@@ -26,12 +23,7 @@ const SearchResult: FC<Props> = ({ imageUrl, type, title }: Props) => (
         <DiscIcon size="xsmall" />
       )}
     </Box>
-    <Box justify="center" flex gap="xsmall">
-      <Text truncate={true}>{title}</Text>
-      <Box direction="row" justify="end">
-        <Tag label={type} />
-      </Box>
-    </Box>
+    <Text truncate={true}>{title}</Text>
   </Box>
 )
 
