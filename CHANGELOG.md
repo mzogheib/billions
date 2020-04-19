@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/mzogheib/geenious/compare/v1.2.0...v1.3.0) (2020-04-19)
+
+### Features
+
+- add custom font for logo ([#18](https://github.com/mzogheib/geenious/issues/18)) ([8a2a33f](https://github.com/mzogheib/geenious/commit/8a2a33f951eee49a2a01ed7f2538b965e078fe4d))
+- change project name to Billions ([#20](https://github.com/mzogheib/geenious/issues/20)) ([3579931](https://github.com/mzogheib/geenious/commit/357993106bc313f491b9de38dbfdd5a13781ae9b))
+
+### Bug Fixes
+
+- fix size prop on TextLogo ([5f614f0](https://github.com/mzogheib/geenious/commit/5f614f0f6aa538e0e757a7cd532bc215d29e2dfa))
+
 ## [1.2.0](https://github.com/mzogheib/billions/compare/v1.1.0...v1.2.0) (2020-04-19)
 
 ### Features
