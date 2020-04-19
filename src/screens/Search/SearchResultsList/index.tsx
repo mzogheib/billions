@@ -1,9 +1,7 @@
 import React, { FC } from 'react'
 import { Box } from 'grommet'
 
-import SearchResult, {
-  Props as SearchResultInterface,
-} from '../../../components/SearchResult'
+import SearchResult, { Props as SearchResultInterface } from '../SearchResult'
 
 // Need an id to add as the key for each list item
 export type SearchResults = (SearchResultInterface & { id: number })[]
