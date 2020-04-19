@@ -4,18 +4,22 @@ import { Search as SearchIcon } from 'grommet-icons'
 
 import SearchResultsList, { SearchResults } from '../SearchResultsList'
 
+export interface OnSubmit {
+  (searchTerm: string): void
+}
+
 interface Props {
   defaultSearchTerm?: string
-  filter: { type: string }
-  onChangeFilter: ({ type }: { type: string }) => void
-  onSubmit: (searchTerm: string) => void
+  onSelectArtists: () => void
+  onSelectReleases: () => void
+  onSubmit: OnSubmit
   searchResults: SearchResults
 }
 
 const SearchUI: FC<Props> = ({
   defaultSearchTerm,
-  filter,
-  onChangeFilter,
+  onSelectArtists,
+  onSelectReleases,
   onSubmit,
   searchResults,
 }: Props) => {
@@ -44,22 +48,17 @@ const SearchUI: FC<Props> = ({
   const tabs = [
     {
       title: 'Artists',
-      type: 'artist',
+      onSelect: onSelectArtists,
     },
     {
       title: 'Releases',
-      type: 'master',
+      onSelect: onSelectReleases,
     },
   ]
 
   const handleSelectTab = (tabIndex: number): void => {
-    const type = tabs[tabIndex].type
-    onChangeFilter({ type })
-  }
-
-  const getActiveTabIndex = (): number => {
-    const index = tabs.findIndex(({ type }) => type === filter.type)
-    return index === -1 ? 0 : index
+    const { onSelect } = tabs[tabIndex]
+    onSelect()
   }
 
   return (
@@ -74,7 +73,7 @@ const SearchUI: FC<Props> = ({
           <Button primary type="submit" icon={<SearchIcon />} />
         </Box>
       </Form>
-      <Tabs activeIndex={getActiveTabIndex()} onActive={handleSelectTab}>
+      <Tabs onActive={handleSelectTab}>
         {tabs.map(({ title }) => (
           <Tab title={title} key={title}>
             <SearchResultsList results={searchResults} />

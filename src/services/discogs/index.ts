@@ -2,6 +2,11 @@ import axios from 'axios'
 
 const baseUrl = 'https://api.discogs.com'
 
+export enum DiscogsSearchType {
+  artist = 'artist',
+  master = 'master',
+}
+
 export type DiscogsSearchResult = {
   id: number
   title: string
@@ -19,7 +24,7 @@ type SearchResponse = {
 
 type SearchParams = {
   query: string
-  type: string
+  type: DiscogsSearchType
 }
 
 interface Search {
