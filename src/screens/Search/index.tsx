@@ -29,11 +29,11 @@ const Search: FC = () => {
   }
 
   const searchResultsForUI = searchResults.map(
-    ({ id, type, title, ...rest }) => ({
+    ({ id, type, title, thumb }) => ({
       id,
       type,
       title,
-      imageUrl: rest['cover_image'],
+      imageUrl: thumb,
     })
   )
 

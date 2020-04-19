@@ -6,7 +6,7 @@ export type DiscogsSearchResult = {
   id: number
   title: string
   type: string
-  cover_image: string
+  thumb: string
 }
 
 type SearchResponse = {
