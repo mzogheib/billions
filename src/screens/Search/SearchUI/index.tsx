@@ -4,7 +4,7 @@ import { Search as SearchIcon } from 'grommet-icons'
 
 import SearchResult, {
   Props as SearchResultInterface,
-} from '../../components/SearchResult'
+} from '../../../components/SearchResult'
 
 // Need an id to add as the key for each list item
 type SearchResults = (SearchResultInterface & { id: number })[]

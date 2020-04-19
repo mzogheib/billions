@@ -1,7 +1,7 @@
 import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
 import { Box, TextInput, Button, Form } from 'grommet'
 
-import TextLogo from '../../components/TextLogo'
+import TextLogo from '../../../components/TextLogo'
 
 interface Props {
   onSubmit: (searchTerm: string) => void

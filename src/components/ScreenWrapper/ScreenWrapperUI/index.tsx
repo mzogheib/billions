@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Box, Button } from 'grommet'
 import { Previous } from 'grommet-icons'
 
-import TextLogo from '../TextLogo'
+import TextLogo from '../../TextLogo'
 
 interface Props {
   children: React.ReactNode
