@@ -19,13 +19,14 @@ type SearchResponse = {
 
 type SearchParams = {
   query: string
+  type: string
 }
 
 interface Search {
   (params: SearchParams): Promise<SearchResponse>
 }
 
-export const search: Search = async ({ query }) => {
+export const search: Search = async ({ query, type }) => {
   const token = process.env.REACT_APP_DISCOGS_TOKEN as string
 
   // TODO: handle errors
@@ -35,6 +36,6 @@ export const search: Search = async ({ query }) => {
     headers: {
       Authorization: `Discogs token=${token}`,
     },
-    params: { q: query },
+    params: { q: query, type },
   })
 }

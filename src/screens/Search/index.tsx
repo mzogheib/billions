@@ -5,24 +5,40 @@ import { makeQueryParams, useQuery } from '../../utils/routerUtils'
 import { search, DiscogsSearchResult } from '../../services/discogs'
 import SearchUI from './SearchUI'
 
+type SearchFilter = {
+  type: string
+}
+
+type HandleSearchParams = {
+  searchQuery?: string
+  searchFilter: SearchFilter
+}
+
+interface HandleSearch {
+  (params: HandleSearchParams): Promise<void>
+}
+
 const Search: FC = () => {
   const { query } = useQuery()
   const { replace } = useHistory()
   const [searchResults, setSearchResults] = useState<DiscogsSearchResult[]>([])
   const [type, setType] = useState<string>('artist')
 
-  const handleSearch = async (searchQuery?: string): Promise<void> => {
+  const handleSearch: HandleSearch = async ({ searchQuery, searchFilter }) => {
     if (!searchQuery) return
 
     // TODO: handle errors
-    const response = await search({ query: searchQuery })
+    const response = await search({
+      query: searchQuery,
+      type: searchFilter.type,
+    })
     const results = response.data.results
     setSearchResults(results)
   }
 
   useEffect(() => {
-    handleSearch(query)
-  }, [query])
+    handleSearch({ searchQuery: query, searchFilter: { type } })
+  }, [query, type])
 
   const setNewQuery = (newQuery: string): void => {
     if (newQuery === query) return

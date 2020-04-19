@@ -48,7 +48,7 @@ const SearchUI: FC<Props> = ({
     },
     {
       title: 'Releases',
-      type: 'release',
+      type: 'master',
     },
   ]
 
