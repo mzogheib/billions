@@ -4,11 +4,10 @@ import { Disc as DiscIcon } from 'grommet-icons'
 
 export interface Props {
   imageUrl?: string
-  type: string
   title: string
 }
 
-const SearchResult: FC<Props> = ({ imageUrl, type, title }: Props) => (
+const SearchResult: FC<Props> = ({ imageUrl, title }: Props) => (
   <Box
     background="white"
     pad="medium"

@@ -9,6 +9,7 @@ const Search: FC = () => {
   const { query } = useQuery()
   const { replace } = useHistory()
   const [searchResults, setSearchResults] = useState<DiscogsSearchResult[]>([])
+  const [type, setType] = useState<string>('artist')
 
   const handleSearch = async (searchQuery?: string): Promise<void> => {
     if (!searchQuery) return
@@ -28,18 +29,25 @@ const Search: FC = () => {
     replace(`/search?${makeQueryParams({ query: newQuery })}`)
   }
 
-  const searchResultsForUI = searchResults.map(
-    ({ id, type, title, thumb }) => ({
+  const searchResultsForUI = searchResults
+    .filter(({ type: resultType }) => resultType === type)
+    .map(({ id, type, title, thumb }) => ({
       id,
       type,
       title,
       imageUrl: thumb,
-    })
-  )
+    }))
+
+  const setFilter = ({ type: newType }: { type: string }): void => {
+    if (newType === type) return
+    setType(newType)
+  }
 
   return (
     <SearchUI
       defaultSearchTerm={query}
+      filter={{ type }}
+      onChangeFilter={setFilter}
       onSubmit={setNewQuery}
       searchResults={searchResultsForUI}
     />

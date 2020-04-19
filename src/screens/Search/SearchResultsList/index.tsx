@@ -14,8 +14,8 @@ interface Props {
 
 const SearchResultsList: FC<Props> = ({ results }: Props) => (
   <Box pad="medium" gap="medium">
-    {results.map(({ id, type, title, imageUrl }) => (
-      <SearchResult key={id} type={type} title={title} imageUrl={imageUrl} />
+    {results.map(({ id, title, imageUrl }) => (
+      <SearchResult key={id} title={title} imageUrl={imageUrl} />
     ))}
   </Box>
 )

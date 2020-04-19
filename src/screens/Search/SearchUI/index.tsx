@@ -6,12 +6,16 @@ import SearchResultsList, { SearchResults } from '../SearchResultsList'
 
 interface Props {
   defaultSearchTerm?: string
+  filter: { type: string }
+  onChangeFilter: ({ type }: { type: string }) => void
   onSubmit: (searchTerm: string) => void
   searchResults: SearchResults
 }
 
 const SearchUI: FC<Props> = ({
   defaultSearchTerm,
+  filter,
+  onChangeFilter,
   onSubmit,
   searchResults,
 }: Props) => {
@@ -40,13 +44,23 @@ const SearchUI: FC<Props> = ({
   const tabs = [
     {
       title: 'Artists',
-      results: searchResults.filter(({ type }) => type === 'artist'),
+      type: 'artist',
     },
     {
       title: 'Releases',
-      results: searchResults.filter(({ type }) => type === 'master'),
+      type: 'release',
     },
   ]
+
+  const handleSelectTab = (tabIndex: number): void => {
+    const type = tabs[tabIndex].type
+    onChangeFilter({ type })
+  }
+
+  const getActiveTabIndex = (): number => {
+    const index = tabs.findIndex(({ type }) => type === filter.type)
+    return index === -1 ? 0 : index
+  }
 
   return (
     <Box fill>
@@ -60,10 +74,10 @@ const SearchUI: FC<Props> = ({
           <Button primary type="submit" icon={<SearchIcon />} />
         </Box>
       </Form>
-      <Tabs>
-        {tabs.map(({ title, results }) => (
+      <Tabs activeIndex={getActiveTabIndex()} onActive={handleSelectTab}>
+        {tabs.map(({ title }) => (
           <Tab title={title} key={title}>
-            <SearchResultsList results={results} />
+            <SearchResultsList results={searchResults} />
           </Tab>
         ))}
       </Tabs>
