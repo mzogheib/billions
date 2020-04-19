@@ -37,6 +37,17 @@ const SearchUI: FC<Props> = ({
     onSubmit(searchTerm)
   }
 
+  const tabs = [
+    {
+      title: 'Artists',
+      results: searchResults.filter(({ type }) => type === 'artist'),
+    },
+    {
+      title: 'Releases',
+      results: searchResults.filter(({ type }) => type === 'master'),
+    },
+  ]
+
   return (
     <Box fill>
       <Form onSubmit={handleSubmit}>
@@ -50,16 +61,11 @@ const SearchUI: FC<Props> = ({
         </Box>
       </Form>
       <Tabs>
-        <Tab title="Artists">
-          <SearchResultsList
-            results={searchResults.filter(({ type }) => type === 'artist')}
-          />
-        </Tab>
-        <Tab title="Releases">
-          <SearchResultsList
-            results={searchResults.filter(({ type }) => type === 'master')}
-          />
-        </Tab>
+        {tabs.map(({ title, results }) => (
+          <Tab title={title} key={title}>
+            <SearchResultsList results={results} />
+          </Tab>
+        ))}
       </Tabs>
     </Box>
   )
