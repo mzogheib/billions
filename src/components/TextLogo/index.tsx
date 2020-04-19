@@ -14,7 +14,7 @@ interface Props {
 // https://github.com/yannickcr/eslint-plugin-react/issues/2353
 const TextLogo: FC<Props> = ({ size }: Props) => (
   <Wrapper size={size} color="brand">
-    Geenious
+    Billions
   </Wrapper>
 )
 
