@@ -2,22 +2,20 @@ import React, { FC, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { makeQueryParams, useQuery } from '../../utils/routerUtils'
+import { search, DiscogsSearchResult } from '../../services/discogs'
 import SearchUI from './SearchUI'
-import { search, SearchResult } from '../../services/discogs'
 
 const Search: FC = () => {
   const { query } = useQuery()
   const { replace } = useHistory()
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
+  const [searchResults, setSearchResults] = useState<DiscogsSearchResult[]>([])
 
   const handleSearch = async (searchQuery?: string): Promise<void> => {
     if (!searchQuery) return
 
+    // TODO: handle errors
     const response = await search({ query: searchQuery })
-    const results = response.data.results.map(({ title, type }) => ({
-      title,
-      type,
-    }))
+    const results = response.data.results
     setSearchResults(results)
   }
 
@@ -30,11 +28,20 @@ const Search: FC = () => {
     replace(`/search?${makeQueryParams({ query: newQuery })}`)
   }
 
+  const searchResultsForUI = searchResults.map(
+    ({ id, type, title, ...rest }) => ({
+      id,
+      type,
+      title,
+      imageUrl: rest['cover_image'],
+    })
+  )
+
   return (
     <SearchUI
       defaultSearchTerm={query}
       onSubmit={setNewQuery}
-      searchResults={searchResults}
+      searchResults={searchResultsForUI}
     />
   )
 }
