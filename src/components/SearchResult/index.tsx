@@ -10,13 +10,12 @@ export interface Props {
 const SearchResult: FC<Props> = ({ imageUrl, type, title }: Props) => (
   <Box
     background="white"
-    height="xsmall"
     pad="medium"
     gap="small"
     round="medium"
     direction="row"
   >
-    <Box width="xsmall">
+    <Box width="xxsmall" height="xxsmall">
       <Image src={imageUrl} fit="contain" />
     </Box>
     <Box justify="center" flex>
