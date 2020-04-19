@@ -18,6 +18,10 @@ interface HandleSearch {
   (params: HandleSearchParams): Promise<void>
 }
 
+interface SetFilter {
+  (params: SearchFilter): void
+}
+
 const Search: FC = () => {
   const { query } = useQuery()
   const { replace } = useHistory()
@@ -54,7 +58,7 @@ const Search: FC = () => {
       imageUrl: thumb,
     }))
 
-  const setFilter = ({ type: newType }: { type: string }): void => {
+  const setFilter: SetFilter = ({ type: newType }) => {
     if (newType === type) return
     setType(newType)
   }
