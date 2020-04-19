@@ -51,9 +51,8 @@ const Search: FC = () => {
 
   const searchResultsForUI = searchResults
     .filter(({ type: resultType }) => resultType === type)
-    .map(({ id, type, title, thumb }) => ({
+    .map(({ id, title, thumb }) => ({
       id,
-      type,
       title,
       imageUrl: thumb,
     }))
