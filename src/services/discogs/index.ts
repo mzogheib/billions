@@ -2,16 +2,18 @@ import axios from 'axios'
 
 const baseUrl = 'https://api.discogs.com'
 
-export type SearchResult = {
+export type DiscogsSearchResult = {
+  id: number
   title: string
   type: string
+  thumb: string
 }
 
 type SearchResponse = {
   status: number
   statusText: string
   data: {
-    results: SearchResult[]
+    results: DiscogsSearchResult[]
   }
 }
 
@@ -26,6 +28,7 @@ interface Search {
 export const search: Search = async ({ query }) => {
   const token = process.env.REACT_APP_DISCOGS_TOKEN as string
 
+  // TODO: handle errors
   return await axios.request({
     method: 'GET',
     url: `${baseUrl}/database/search`,
