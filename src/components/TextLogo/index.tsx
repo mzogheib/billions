@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Text } from 'grommet'
 
 interface Props {
-  size: string
+  size?: string
 }
 
 // Feels redundant to specify the type twice but here is some background as to why

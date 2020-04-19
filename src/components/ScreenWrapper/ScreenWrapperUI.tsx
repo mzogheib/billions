@@ -22,7 +22,7 @@ const ScreenWrapper: FC<Props> = ({ onBack, children }: Props) => (
         <Button icon={<Previous color="brand" />} onClick={onBack} />
       </Box>
       <Box basis="1/3" justify="center" direction="row">
-        <TextLogo size="xxsmal" />
+        <TextLogo />
       </Box>
       <Box basis="1/3" />
     </Box>
