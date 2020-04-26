@@ -16,7 +16,7 @@ const SearchResult: FC<Props> = ({ imageUrl, title }: Props) => (
     direction="row"
     align="center"
   >
-    <Box width="xxsmall" height="xxsmall">
+    <Box flex="grow" width={{ max: 'xxsmall' }} height="xxsmall">
       {imageUrl ? (
         <Image src={imageUrl} fit="contain" />
       ) : (
