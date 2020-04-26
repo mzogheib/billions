@@ -20,7 +20,7 @@ const SearchResult: FC<Props> = ({ imageUrl, title }: Props) => (
       {imageUrl ? (
         <Image src={imageUrl} fit="contain" />
       ) : (
-        <DiscIcon size="xsmall" />
+        <DiscIcon size="large" />
       )}
     </Box>
     <Text truncate={true}>{title}</Text>
