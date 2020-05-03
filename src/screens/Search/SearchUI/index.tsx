@@ -1,4 +1,5 @@
 import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
+import styled from 'styled-components'
 import { Box, TextInput, Button, Form, Tabs, Tab } from 'grommet'
 import { Search as SearchIcon } from 'grommet-icons'
 
@@ -6,6 +7,10 @@ import SearchResultsList, {
   SearchResults,
   SearchResultsListPlaceholder,
 } from '../SearchResultsList'
+
+const RoundButton = styled(Button)`
+  border-radius: 50%;
+`
 
 export interface OnSubmit {
   (searchTerm: string): void
@@ -75,7 +80,7 @@ const SearchUI: FC<Props> = ({
             value={searchTerm}
             onChange={handleInputChange}
           />
-          <Button primary type="submit" icon={<SearchIcon />} />
+          <RoundButton primary type="submit" icon={<SearchIcon />} />
         </Box>
       </Form>
       <Tabs onActive={handleSelectTab}>
