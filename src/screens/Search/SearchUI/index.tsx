@@ -2,7 +2,10 @@ import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
 import { Box, TextInput, Button, Form, Tabs, Tab } from 'grommet'
 import { Search as SearchIcon } from 'grommet-icons'
 
-import SearchResultsList, { SearchResults } from '../SearchResultsList'
+import SearchResultsList, {
+  SearchResults,
+  SearchResultsListPlaceholder,
+} from '../SearchResultsList'
 
 export interface OnSubmit {
   (searchTerm: string): void
@@ -14,6 +17,7 @@ interface Props {
   onSelectReleases: () => void
   onSubmit: OnSubmit
   searchResults: SearchResults
+  isLoading: boolean
 }
 
 const SearchUI: FC<Props> = ({
@@ -22,6 +26,7 @@ const SearchUI: FC<Props> = ({
   onSelectReleases,
   onSubmit,
   searchResults,
+  isLoading,
 }: Props) => {
   const [searchTerm, setSearchTerm] = useState<string | undefined>(
     defaultSearchTerm
@@ -76,7 +81,11 @@ const SearchUI: FC<Props> = ({
       <Tabs onActive={handleSelectTab}>
         {tabs.map(({ title }) => (
           <Tab title={title} key={title}>
-            <SearchResultsList results={searchResults} />
+            {isLoading ? (
+              <SearchResultsListPlaceholder />
+            ) : (
+              <SearchResultsList results={searchResults} />
+            )}
           </Tab>
         ))}
       </Tabs>

@@ -27,9 +27,12 @@ const Search: FC = () => {
   const { replace } = useHistory()
   const [searchResults, setSearchResults] = useState<DiscogsSearchResult[]>([])
   const [type, setType] = useState<DiscogsSearchType>(DiscogsSearchType.artist)
+  const [isLoading, setLoading] = useState(false)
 
   const handleSearch: HandleSearch = async ({ searchQuery, searchFilter }) => {
     if (!searchQuery) return
+
+    setLoading(true)
 
     // TODO: handle errors
     const response = await search({
@@ -38,6 +41,8 @@ const Search: FC = () => {
     })
     const results = response.data.results
     setSearchResults(results)
+
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -62,6 +67,7 @@ const Search: FC = () => {
       onSelectReleases={(): void => setType(DiscogsSearchType.master)}
       onSubmit={setNewQuery}
       searchResults={searchResultsForUI}
+      isLoading={isLoading}
     />
   )
 }
