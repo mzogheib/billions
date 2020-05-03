@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/mzogheib/geenious/compare/v1.3.0...v1.4.0) (2020-05-03)
+
+### Features
+
+- display placeholders for search results when loading ([#27](https://github.com/mzogheib/geenious/issues/27)) ([ef21bb4](https://github.com/mzogheib/geenious/commit/ef21bb4860d9017b74c20b11cdde242371028757))
+- split search results into Artists and Releases only ([#26](https://github.com/mzogheib/geenious/issues/26)) ([cf612d5](https://github.com/mzogheib/geenious/commit/cf612d5c5e4897057977b52367adc25af1462ff4))
+
+### Bug Fixes
+
+- ensure SearchResult image is always the same size ([83eb8b5](https://github.com/mzogheib/geenious/commit/83eb8b5266241e99edd3717b8d4baa811629552c))
+- fix invalid DiscIcon prop ([135e6ef](https://github.com/mzogheib/geenious/commit/135e6ef581fe7ad4cadad5829271b472beaba440))
+
 ## [1.3.0](https://github.com/mzogheib/geenious/compare/v1.2.0...v1.3.0) (2020-04-19)
 
 ### Features
