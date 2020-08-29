@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import MainScreen from './screens/MainScreen'
 import Search from './screens/Search'
+import Artist from './screens/Artist'
 import ScreenWrapper from './components/ScreenWrapper'
 
 const App: FC = () => {
@@ -22,7 +23,7 @@ const App: FC = () => {
           </Route>
           <Route path="/artists/:artistId">
             <ScreenWrapper>
-              <div>Artist page</div>
+              <Artist />
             </ScreenWrapper>
           </Route>
           <Route path="/releases/:releaseId">
