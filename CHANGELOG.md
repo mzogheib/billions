@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/mzogheib/geenious/compare/v1.4.0...v1.5.0) (2020-08-29)
+
+### Features
+
+- make search button in list view round ([c0ebbeb](https://github.com/mzogheib/geenious/commit/c0ebbebc8447a6cca3613bf047bedf0ead62f2cf))
+
 ## [1.4.0](https://github.com/mzogheib/geenious/compare/v1.3.0...v1.4.0) (2020-05-03)
 
 ### Features
