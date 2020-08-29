@@ -24,7 +24,7 @@ interface HandleSearch {
 
 const Search: FC = () => {
   const { query } = useQuery()
-  const { replace } = useHistory()
+  const { replace, push } = useHistory()
   const [searchResults, setSearchResults] = useState<DiscogsSearchResult[]>([])
   const [type, setType] = useState<DiscogsSearchType>(DiscogsSearchType.artist)
   const [isLoading, setLoading] = useState(false)
@@ -54,6 +54,14 @@ const Search: FC = () => {
     replace(`/search?${makeQueryParams({ query: newQuery })}`)
   }
 
+  const handleSelectArtist = (id: number): void => {
+    push(`/artists/${id}`)
+  }
+
+  const handleSelectRelease = (id: number): void => {
+    push(`/releases/${id}`)
+  }
+
   const searchResultsForUI = searchResults.map(({ id, title, thumb }) => ({
     id,
     title,
@@ -65,6 +73,8 @@ const Search: FC = () => {
       defaultSearchTerm={query}
       onSelectArtists={(): void => setType(DiscogsSearchType.artist)}
       onSelectReleases={(): void => setType(DiscogsSearchType.master)}
+      onSelectArtist={handleSelectArtist}
+      onSelectRelease={handleSelectRelease}
       onSubmit={setNewQuery}
       searchResults={searchResultsForUI}
       isLoading={isLoading}

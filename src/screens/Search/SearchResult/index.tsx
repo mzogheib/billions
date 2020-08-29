@@ -4,12 +4,18 @@ import { Disc as DiscIcon } from 'grommet-icons'
 
 import LoadingBox from '../../../components/LoadingBox'
 
-export interface Props {
+export interface DataProps {
   imageUrl?: string
   title: string
 }
 
-const SearchResult: FC<Props> = ({ imageUrl, title }: Props) => (
+interface FunctionProps {
+  onSelect: () => void
+}
+
+type Props = DataProps & FunctionProps
+
+const SearchResult: FC<Props> = ({ imageUrl, title, onSelect }: Props) => (
   <Box
     background="white"
     pad="medium"
@@ -17,6 +23,7 @@ const SearchResult: FC<Props> = ({ imageUrl, title }: Props) => (
     round="medium"
     direction="row"
     align="center"
+    onClick={onSelect}
   >
     <Box flex="grow" width={{ max: 'xxsmall' }} height="xxsmall">
       {imageUrl ? (

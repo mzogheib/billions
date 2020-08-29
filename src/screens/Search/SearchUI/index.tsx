@@ -20,6 +20,8 @@ interface Props {
   defaultSearchTerm?: string
   onSelectArtists: () => void
   onSelectReleases: () => void
+  onSelectArtist: (id: number) => void
+  onSelectRelease: (id: number) => void
   onSubmit: OnSubmit
   searchResults: SearchResults
   isLoading: boolean
@@ -29,6 +31,8 @@ const SearchUI: FC<Props> = ({
   defaultSearchTerm,
   onSelectArtists,
   onSelectReleases,
+  onSelectArtist,
+  onSelectRelease,
   onSubmit,
   searchResults,
   isLoading,
@@ -59,10 +63,12 @@ const SearchUI: FC<Props> = ({
     {
       title: 'Artists',
       onSelect: onSelectArtists,
+      onSelectResult: onSelectArtist,
     },
     {
       title: 'Releases',
       onSelect: onSelectReleases,
+      onSelectResult: onSelectRelease,
     },
   ]
 
@@ -84,12 +90,15 @@ const SearchUI: FC<Props> = ({
         </Box>
       </Form>
       <Tabs onActive={handleSelectTab}>
-        {tabs.map(({ title }) => (
+        {tabs.map(({ title, onSelectResult }) => (
           <Tab title={title} key={title}>
             {isLoading ? (
               <SearchResultsListPlaceholder />
             ) : (
-              <SearchResultsList results={searchResults} />
+              <SearchResultsList
+                results={searchResults}
+                onSelectResult={onSelectResult}
+              />
             )}
           </Tab>
         ))}

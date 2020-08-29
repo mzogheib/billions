@@ -20,6 +20,16 @@ const App: FC = () => {
               <Search />
             </ScreenWrapper>
           </Route>
+          <Route path="/artists/:artistId">
+            <ScreenWrapper>
+              <div>Artist page</div>
+            </ScreenWrapper>
+          </Route>
+          <Route path="/releases/:releaseId">
+            <ScreenWrapper>
+              <div>Release page</div>
+            </ScreenWrapper>
+          </Route>
         </Switch>
       </Router>
     </Grommet>
