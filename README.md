@@ -5,6 +5,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
+## Getting Started
+
+1. Clone the repo
+2. Create a `.env` file in the root directory. Get your personal access token [here](https://www.discogs.com/settings/developers).
+
+```bash
+REACT_APP_DISCOGS_TOKEN=replace-with-personal-access-token
+```
+
+3. Start
+
+```bash
+yarn start
+```
+
 ## Linting & Code Formatting
 
 - https://www.robertcooper.me/using-eslint-and-prettier-in-a-typescript-project
