@@ -44,3 +44,40 @@ export const search: Search = async ({ query, type }) => {
     params: { q: query, type },
   })
 }
+
+export type FetchArtistResponseData = {
+  name: string
+  profile?: string
+  images?: {
+    uri: string
+  }[]
+  members?: {}[]
+  urls?: string[]
+}
+
+type FetchArtistResponse = {
+  status: number
+  statusText: string
+  data: FetchArtistResponseData
+}
+
+type FetchArtistParams = {
+  id: string | undefined
+}
+
+interface FetchArtist {
+  (params: FetchArtistParams): Promise<FetchArtistResponse>
+}
+
+export const fetchArtist: FetchArtist = async ({ id }) => {
+  const token = process.env.REACT_APP_DISCOGS_TOKEN as string
+
+  // TODO: handle errors
+  return await axios.request({
+    method: 'GET',
+    url: `${baseUrl}/artists/${id}`,
+    headers: {
+      Authorization: `Discogs token=${token}`,
+    },
+  })
+}
