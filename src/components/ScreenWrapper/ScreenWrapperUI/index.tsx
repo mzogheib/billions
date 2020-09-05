@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Box, Button } from 'grommet'
+import { Box, Button, Header } from 'grommet'
 import { Previous } from 'grommet-icons'
 
 import TextLogo from '../../TextLogo'
@@ -11,13 +11,7 @@ interface Props {
 
 const ScreenWrapper: FC<Props> = ({ onBack, children }: Props) => (
   <Box>
-    <Box
-      as="header"
-      direction="row"
-      justify="between"
-      align="center"
-      height="xxsmall"
-    >
+    <Header>
       <Box basis="1/3" align="start">
         <Button icon={<Previous color="brand" />} onClick={onBack} />
       </Box>
@@ -25,7 +19,7 @@ const ScreenWrapper: FC<Props> = ({ onBack, children }: Props) => (
         <TextLogo size="large" />
       </Box>
       <Box basis="1/3" />
-    </Box>
+    </Header>
     {children}
   </Box>
 )
