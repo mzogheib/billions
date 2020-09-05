@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Box, Text } from 'grommet'
+import { Box } from 'grommet'
 import { Disc } from 'grommet-icons'
 
 import ResourceListItem, {
@@ -20,7 +20,7 @@ const SearchResultsList: FC<Props> = ({ results, onSelectResult }: Props) => (
     {results.map(({ id, title, imageUrl }) => (
       <ResourceListItem
         key={id}
-        title={<Text truncate={true}>{title}</Text>}
+        title={title}
         imageUrl={imageUrl}
         icon={<Disc size="large" />}
         onSelect={(): void => onSelectResult(id)}

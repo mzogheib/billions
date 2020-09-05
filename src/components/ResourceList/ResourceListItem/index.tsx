@@ -6,7 +6,7 @@ import LoadingBox from '../../../components/LoadingBox'
 interface DataProps {
   imageUrl?: string
   icon: ReactNode
-  title: ReactNode
+  title: string
 }
 
 interface FunctionProps {

@@ -1,10 +1,11 @@
 import React, { FC } from 'react'
-import { Box, Image, Heading, Tab, Tabs, Text, Anchor } from 'grommet'
+import { Box, Image, Heading, Tab, Tabs } from 'grommet'
 import {
   Group as GroupIcon,
   User as UserIcon,
   Link as LinkIcon,
 } from 'grommet-icons'
+import ResourceListItem from '../../../components/ResourceList/ResourceListItem'
 
 interface Props {
   name: string
@@ -24,6 +25,10 @@ const ArtistUI: FC<Props> = ({
   const PlaceholderIcon = isIndividual ? UserIcon : GroupIcon
 
   const hasTabs = !!aboutText || !!(externalUrls && externalUrls.length)
+
+  const handleSelectLink = (url: string): void => {
+    window.open(url, '_blank')
+  }
 
   return (
     <Box fill pad="medium" align="center">
@@ -54,27 +59,13 @@ const ArtistUI: FC<Props> = ({
             {externalUrls && externalUrls.length && (
               <Tab title="Links">
                 <Box margin={{ top: 'medium' }} gap="medium">
-                  {externalUrls.map(url => (
-                    <Box
-                      key={url}
-                      background="white"
-                      pad="medium"
-                      gap="small"
-                      round="medium"
-                      direction="row"
-                      align="center"
-                    >
-                      <Box
-                        flex="grow"
-                        width={{ max: 'xxsmall' }}
-                        height="xxsmall"
-                      >
-                        <LinkIcon size="large" />
-                      </Box>
-                      <Text truncate={true}>
-                        <Anchor href={url} target="_blank" label={url} />
-                      </Text>
-                    </Box>
+                  {externalUrls.map((url, i) => (
+                    <ResourceListItem
+                      key={i}
+                      title={url}
+                      icon={<LinkIcon size="large" />}
+                      onSelect={(): void => handleSelectLink(url)}
+                    />
                   ))}
                 </Box>
               </Tab>
