@@ -85,3 +85,49 @@ export const fetchArtist: FetchArtist = async ({ id }) => {
     },
   })
 }
+
+// MASTER
+
+export type FetchMasterResponseData = {
+  title: string
+  year?: number
+  artists?: {
+    name: string
+    id: number
+  }[]
+  images?: {
+    uri: string
+  }[]
+  tracklist?: {
+    position: string
+    title: string
+    duration: string
+  }[]
+}
+
+type FetchMasterResponse = {
+  status: number
+  statusText: string
+  data: FetchMasterResponseData
+}
+
+type FetchMasterParams = {
+  id: number
+}
+
+interface FetchResponse {
+  (params: FetchMasterParams): Promise<FetchMasterResponse>
+}
+
+export const fetchMaster: FetchResponse = async ({ id }) => {
+  const token = process.env.REACT_APP_DISCOGS_TOKEN as string
+
+  // TODO: handle errors
+  return await axios.request({
+    method: 'GET',
+    url: `${baseUrl}/masters/${id}`,
+    headers: {
+      Authorization: `Discogs token=${token}`,
+    },
+  })
+}

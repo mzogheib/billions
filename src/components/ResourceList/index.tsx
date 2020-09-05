@@ -17,7 +17,7 @@ interface DataProps {
 }
 
 interface FunctionProps {
-  onSelectItem: (id: number) => void
+  onSelectItem?: (id: number) => void
 }
 
 type Props = DataProps & FunctionProps
@@ -39,13 +39,12 @@ const ResourceList: FC<Props> = ({
   return (
     <Box gap="medium">
       {items.map(({ id, imageUrl, icon, title }) => (
-        <ResourceListItem
+        <Box
           key={id}
-          imageUrl={imageUrl}
-          title={title}
-          icon={icon}
-          onSelect={(): void => onSelectItem(id)}
-        />
+          onClick={onSelectItem ? (): void => onSelectItem(id) : undefined}
+        >
+          <ResourceListItem imageUrl={imageUrl} title={title} icon={icon} />
+        </Box>
       ))}
     </Box>
   )

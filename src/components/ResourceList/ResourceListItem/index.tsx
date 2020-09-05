@@ -9,18 +9,9 @@ interface DataProps {
   title: string
 }
 
-interface FunctionProps {
-  onSelect: () => void
-}
+type Props = DataProps
 
-type Props = DataProps & FunctionProps
-
-const ResourceListItem: FC<Props> = ({
-  imageUrl,
-  icon,
-  title,
-  onSelect,
-}: Props) => (
+const ResourceListItem: FC<Props> = ({ imageUrl, icon, title }: Props) => (
   <Box
     background="white"
     pad="medium"
@@ -28,7 +19,6 @@ const ResourceListItem: FC<Props> = ({
     round="medium"
     direction="row"
     align="center"
-    onClick={onSelect}
   >
     <Box flex="grow" width={{ max: 'xxsmall' }} height="xxsmall">
       {imageUrl ? <Image src={imageUrl} fit="contain" /> : icon}
