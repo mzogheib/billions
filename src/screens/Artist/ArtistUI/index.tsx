@@ -13,6 +13,7 @@ interface Props {
   isIndividual: boolean
   aboutText?: string
   externalUrls?: string[]
+  onSelectUrl(url: string): void
 }
 
 const ArtistUI: FC<Props> = ({
@@ -21,14 +22,11 @@ const ArtistUI: FC<Props> = ({
   isIndividual,
   aboutText,
   externalUrls,
+  onSelectUrl,
 }: Props) => {
   const PlaceholderIcon = isIndividual ? UserIcon : GroupIcon
 
   const hasTabs = !!aboutText || !!(externalUrls && externalUrls.length)
-
-  const handleSelectLink = (url: string): void => {
-    window.open(url, '_blank')
-  }
 
   return (
     <Box fill pad="medium" align="center">
@@ -64,7 +62,7 @@ const ArtistUI: FC<Props> = ({
                       key={i}
                       title={url}
                       icon={<LinkIcon size="large" />}
-                      onSelect={(): void => handleSelectLink(url)}
+                      onSelect={(): void => onSelectUrl(url)}
                     />
                   ))}
                 </Box>

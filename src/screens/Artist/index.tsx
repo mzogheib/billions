@@ -55,6 +55,10 @@ const Artist: FC = () => {
   const primaryImageUrl = images && images.length ? images[0].uri : undefined
   const isIndividual = !(members && members.length)
 
+  const handleSelectUrl = (url: string): void => {
+    window.open(url, '_blank')
+  }
+
   return (
     <ArtistUI
       name={name}
@@ -62,6 +66,7 @@ const Artist: FC = () => {
       aboutText={aboutText}
       isIndividual={isIndividual}
       externalUrls={urls}
+      onSelectUrl={handleSelectUrl}
     />
   )
 }
