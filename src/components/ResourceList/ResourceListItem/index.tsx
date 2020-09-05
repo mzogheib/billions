@@ -3,13 +3,11 @@ import { Text, Box, Image } from 'grommet'
 
 import LoadingBox from '../../../components/LoadingBox'
 
-interface DataProps {
+interface Props {
   imageUrl?: string
   icon: ReactNode
   title: string
 }
-
-type Props = DataProps
 
 const ResourceListItem: FC<Props> = ({ imageUrl, icon, title }: Props) => (
   <Box
