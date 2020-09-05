@@ -115,11 +115,11 @@ type FetchMasterParams = {
   id: number
 }
 
-interface FetchResponse {
+interface FetchMaster {
   (params: FetchMasterParams): Promise<FetchMasterResponse>
 }
 
-export const fetchMaster: FetchResponse = async ({ id }) => {
+export const fetchMaster: FetchMaster = async ({ id }) => {
   const token = process.env.REACT_APP_DISCOGS_TOKEN as string
 
   // TODO: handle errors
