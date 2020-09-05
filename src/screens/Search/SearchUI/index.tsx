@@ -84,9 +84,9 @@ const SearchUI: FC<Props> = ({
   }))
 
   return (
-    <Box fill>
+    <Box fill pad="medium">
       <Form onSubmit={handleSubmit}>
-        <Box direction="row" align="center" gap="small" pad="medium">
+        <Box direction="row" align="center" gap="small">
           <TextInput
             placeholder="Search..."
             value={searchTerm}
@@ -95,10 +95,10 @@ const SearchUI: FC<Props> = ({
           <RoundButton primary type="submit" icon={<SearchIcon />} />
         </Box>
       </Form>
-      <Tabs onActive={handleSelectTab}>
+      <Tabs onActive={handleSelectTab} margin={{ top: 'small' }}>
         {tabs.map(({ title, onSelectResult }) => (
           <Tab title={title} key={title}>
-            <Box pad="medium">
+            <Box margin={{ top: 'medium' }}>
               <ResourceList
                 items={listItems}
                 shouldShowPlaceholders={isLoading}
