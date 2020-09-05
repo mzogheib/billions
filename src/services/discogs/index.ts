@@ -14,15 +14,19 @@ export type DiscogsSearchResult = {
   thumb: string
 }
 
-// SEARCH
-
-type SearchResponse = {
+type FetchResponse<ResponseData> = {
   status: number
   statusText: string
-  data: {
-    results: DiscogsSearchResult[]
-  }
+  data: ResponseData
 }
+
+// SEARCH
+
+type SearchResponseData = {
+  results: DiscogsSearchResult[]
+}
+
+type SearchResponse = FetchResponse<SearchResponseData>
 
 type SearchParams = {
   query: string
@@ -59,11 +63,7 @@ export type FetchArtistResponseData = {
   urls?: string[]
 }
 
-type FetchArtistResponse = {
-  status: number
-  statusText: string
-  data: FetchArtistResponseData
-}
+type FetchArtistResponse = FetchResponse<FetchArtistResponseData>
 
 type FetchArtistParams = {
   id: number
@@ -105,11 +105,7 @@ export type FetchMasterResponseData = {
   }[]
 }
 
-type FetchMasterResponse = {
-  status: number
-  statusText: string
-  data: FetchMasterResponseData
-}
+type FetchMasterResponse = FetchResponse<FetchMasterResponseData>
 
 type FetchMasterParams = {
   id: number
