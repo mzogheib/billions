@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/mzogheib/geenious/compare/v1.5.0...v1.6.0) (2020-09-05)
+
+### Features
+
+- display detailed pages for artist and release ([#30](https://github.com/mzogheib/geenious/issues/30)) ([55ace53](https://github.com/mzogheib/geenious/commit/55ace53c0ba2f91ba7ecfec7c68d8565b7c93873))
+
 ## [1.5.0](https://github.com/mzogheib/geenious/compare/v1.4.0...v1.5.0) (2020-08-29)
 
 ### Features
