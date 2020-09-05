@@ -6,7 +6,7 @@ import LoadingBox from '../../../components/LoadingBox'
 interface Props {
   imageUrl?: string
   icon: ReactNode
-  title: string
+  title: ReactNode
 }
 
 const ResourceListItem: FC<Props> = ({ imageUrl, icon, title }: Props) => (
@@ -21,7 +21,7 @@ const ResourceListItem: FC<Props> = ({ imageUrl, icon, title }: Props) => (
     <Box flex="grow" width={{ max: 'xxsmall' }} height="xxsmall">
       {imageUrl ? <Image src={imageUrl} fit="contain" /> : icon}
     </Box>
-    <Text truncate={true}>{title}</Text>
+    {typeof title === 'string' ? <Text truncate={true}>{title}</Text> : title}
   </Box>
 )
 

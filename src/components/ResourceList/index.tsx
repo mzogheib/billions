@@ -10,7 +10,7 @@ interface DataProps {
     id: number
     imageUrl?: string
     icon: ReactNode
-    title: string
+    title: ReactNode
   }[]
   shouldShowPlaceholders?: boolean
   numPlaceholders?: number

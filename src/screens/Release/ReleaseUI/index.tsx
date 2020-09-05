@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react'
-import { Box, Image, Heading } from 'grommet'
+import { Box, Image, Heading, Text } from 'grommet'
 import { Disc as DiscIcon } from 'grommet-icons'
 import ResourceList from '../../../components/ResourceList'
 
@@ -35,9 +35,15 @@ const ReleaseUI: FC<Props> = ({
 
     const items = tracks.map(({ position, title, duration }, id) => ({
       id,
-      title: [position, title, duration]
-        .filter(titleItem => !!titleItem)
-        .join(' - '),
+      title: (
+        <Box direction="row" gap="small" fill>
+          <Text>{position}</Text>
+          <Box fill>
+            <Text truncate={true}>{title}</Text>
+          </Box>
+          <Text>{duration}</Text>
+        </Box>
+      ),
       icon: <DiscIcon size="large" />,
     }))
 
