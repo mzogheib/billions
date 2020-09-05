@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import MainScreen from './screens/MainScreen'
 import Search from './screens/Search'
+import Artist from './screens/Artist'
+import Release from './screens/Release'
 import ScreenWrapper from './components/ScreenWrapper'
 
 const App: FC = () => {
@@ -18,6 +20,16 @@ const App: FC = () => {
           <Route path="/search">
             <ScreenWrapper>
               <Search />
+            </ScreenWrapper>
+          </Route>
+          <Route path="/artists/:artistId">
+            <ScreenWrapper>
+              <Artist />
+            </ScreenWrapper>
+          </Route>
+          <Route path="/releases/:releaseId">
+            <ScreenWrapper>
+              <Release />
             </ScreenWrapper>
           </Route>
         </Switch>

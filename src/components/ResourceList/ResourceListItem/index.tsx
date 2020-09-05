@@ -1,15 +1,15 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { Text, Box, Image } from 'grommet'
-import { Disc as DiscIcon } from 'grommet-icons'
 
 import LoadingBox from '../../../components/LoadingBox'
 
-export interface Props {
+interface Props {
   imageUrl?: string
-  title: string
+  icon: ReactNode
+  title: ReactNode
 }
 
-const SearchResult: FC<Props> = ({ imageUrl, title }: Props) => (
+const ResourceListItem: FC<Props> = ({ imageUrl, icon, title }: Props) => (
   <Box
     background="white"
     pad="medium"
@@ -19,19 +19,15 @@ const SearchResult: FC<Props> = ({ imageUrl, title }: Props) => (
     align="center"
   >
     <Box flex="grow" width={{ max: 'xxsmall' }} height="xxsmall">
-      {imageUrl ? (
-        <Image src={imageUrl} fit="contain" />
-      ) : (
-        <DiscIcon size="large" />
-      )}
+      {imageUrl ? <Image src={imageUrl} fit="contain" /> : icon}
     </Box>
-    <Text truncate={true}>{title}</Text>
+    {typeof title === 'string' ? <Text truncate={true}>{title}</Text> : title}
   </Box>
 )
 
-export default SearchResult
+export default ResourceListItem
 
-export const SearchResultPlaceholder: FC = () => (
+export const ResourceListItemPlaceholder: FC = () => (
   <Box
     background="white"
     pad="medium"

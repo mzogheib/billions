@@ -1,12 +1,9 @@
 import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
 import styled from 'styled-components'
 import { Box, TextInput, Button, Form, Tabs, Tab } from 'grommet'
-import { Search as SearchIcon } from 'grommet-icons'
+import { Search as SearchIcon, Disc } from 'grommet-icons'
 
-import SearchResultsList, {
-  SearchResults,
-  SearchResultsListPlaceholder,
-} from '../SearchResultsList'
+import ResourceList from '../../../components/ResourceList'
 
 const RoundButton = styled(Button)`
   border-radius: 50%;
@@ -20,8 +17,14 @@ interface Props {
   defaultSearchTerm?: string
   onSelectArtists: () => void
   onSelectReleases: () => void
+  onSelectArtist: (id: number) => void
+  onSelectRelease: (id: number) => void
   onSubmit: OnSubmit
-  searchResults: SearchResults
+  searchResults: {
+    id: number
+    title: string
+    imageUrl: string
+  }[]
   isLoading: boolean
 }
 
@@ -29,6 +32,8 @@ const SearchUI: FC<Props> = ({
   defaultSearchTerm,
   onSelectArtists,
   onSelectReleases,
+  onSelectArtist,
+  onSelectRelease,
   onSubmit,
   searchResults,
   isLoading,
@@ -59,10 +64,12 @@ const SearchUI: FC<Props> = ({
     {
       title: 'Artists',
       onSelect: onSelectArtists,
+      onSelectResult: onSelectArtist,
     },
     {
       title: 'Releases',
       onSelect: onSelectReleases,
+      onSelectResult: onSelectRelease,
     },
   ]
 
@@ -71,10 +78,15 @@ const SearchUI: FC<Props> = ({
     onSelect()
   }
 
+  const listItems = searchResults.map(result => ({
+    ...result,
+    icon: <Disc size="large" />,
+  }))
+
   return (
-    <Box fill>
+    <Box fill pad="medium">
       <Form onSubmit={handleSubmit}>
-        <Box direction="row" align="center" gap="small" pad="medium">
+        <Box direction="row" align="center" gap="small">
           <TextInput
             placeholder="Search..."
             value={searchTerm}
@@ -83,14 +95,16 @@ const SearchUI: FC<Props> = ({
           <RoundButton primary type="submit" icon={<SearchIcon />} />
         </Box>
       </Form>
-      <Tabs onActive={handleSelectTab}>
-        {tabs.map(({ title }) => (
+      <Tabs onActive={handleSelectTab} margin={{ top: 'small' }}>
+        {tabs.map(({ title, onSelectResult }) => (
           <Tab title={title} key={title}>
-            {isLoading ? (
-              <SearchResultsListPlaceholder />
-            ) : (
-              <SearchResultsList results={searchResults} />
-            )}
+            <Box margin={{ top: 'medium' }}>
+              <ResourceList
+                items={listItems}
+                shouldShowPlaceholders={isLoading}
+                onSelectItem={onSelectResult}
+              />
+            </Box>
           </Tab>
         ))}
       </Tabs>
