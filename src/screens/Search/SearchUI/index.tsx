@@ -4,7 +4,7 @@ import { Box, TextInput, Button, Form, Tabs, Tab } from 'grommet'
 import { Search as SearchIcon } from 'grommet-icons'
 
 import SearchResultsList, {
-  SearchResults,
+  ResourceListItems,
   SearchResultsListPlaceholder,
 } from '../SearchResultsList'
 
@@ -23,7 +23,7 @@ interface Props {
   onSelectArtist: (id: number) => void
   onSelectRelease: (id: number) => void
   onSubmit: OnSubmit
-  searchResults: SearchResults
+  searchResults: ResourceListItems
   isLoading: boolean
 }
 

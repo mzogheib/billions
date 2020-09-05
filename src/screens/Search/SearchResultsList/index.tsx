@@ -1,23 +1,23 @@
 import React, { FC } from 'react'
 import { Box } from 'grommet'
 
-import SearchResult, {
-  DataProps as SearchResultProps,
-  SearchResultPlaceholder,
-} from '../SearchResult'
+import ResourceListItem, {
+  DataProps as ResourceListItemProps,
+  ResourceListItemPlaceholder,
+} from '../../../components/ResourceList/ResourceListItem'
 
 // Need an id to add as the key for each list item
-export type SearchResults = (SearchResultProps & { id: number })[]
+export type ResourceListItems = (ResourceListItemProps & { id: number })[]
 
 interface Props {
-  results: SearchResults
+  results: ResourceListItems
   onSelectResult: (id: number) => void
 }
 
 const SearchResultsList: FC<Props> = ({ results, onSelectResult }: Props) => (
   <Box pad="medium" gap="medium">
     {results.map(({ id, title, imageUrl }) => (
-      <SearchResult
+      <ResourceListItem
         key={id}
         title={title}
         imageUrl={imageUrl}
@@ -32,7 +32,7 @@ export default SearchResultsList
 export const SearchResultsListPlaceholder: FC = () => {
   const maxRows = 10
   const placeholderRows = [...Array(maxRows)].map((_, index) => (
-    <SearchResultPlaceholder key={index} />
+    <ResourceListItemPlaceholder key={index} />
   ))
 
   return (
