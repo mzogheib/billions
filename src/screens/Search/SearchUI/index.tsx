@@ -1,11 +1,9 @@
 import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
 import styled from 'styled-components'
 import { Box, TextInput, Button, Form, Tabs, Tab } from 'grommet'
-import { Search as SearchIcon } from 'grommet-icons'
+import { Search as SearchIcon, Disc } from 'grommet-icons'
 
-import SearchResultsList, {
-  SearchResultsListPlaceholder,
-} from '../SearchResultsList'
+import ResourceList from '../../../components/ResourceList'
 
 const RoundButton = styled(Button)`
   border-radius: 50%;
@@ -80,6 +78,11 @@ const SearchUI: FC<Props> = ({
     onSelect()
   }
 
+  const listItems = searchResults.map(result => ({
+    ...result,
+    icon: <Disc size="large" />,
+  }))
+
   return (
     <Box fill>
       <Form onSubmit={handleSubmit}>
@@ -95,14 +98,13 @@ const SearchUI: FC<Props> = ({
       <Tabs onActive={handleSelectTab}>
         {tabs.map(({ title, onSelectResult }) => (
           <Tab title={title} key={title}>
-            {isLoading ? (
-              <SearchResultsListPlaceholder />
-            ) : (
-              <SearchResultsList
-                results={searchResults}
-                onSelectResult={onSelectResult}
+            <Box pad="medium">
+              <ResourceList
+                items={listItems}
+                shouldShowPlaceholders={isLoading}
+                onSelectItem={onSelectResult}
               />
-            )}
+            </Box>
           </Tab>
         ))}
       </Tabs>

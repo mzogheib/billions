@@ -1,11 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { Box, Image, Heading, Tab, Tabs } from 'grommet'
 import {
   Group as GroupIcon,
   User as UserIcon,
   Link as LinkIcon,
 } from 'grommet-icons'
-import ResourceListItem from '../../../components/ResourceList/ResourceListItem'
+import ResourceList from '../../../components/ResourceList'
 
 interface Props {
   name: string
@@ -26,7 +26,31 @@ const ArtistUI: FC<Props> = ({
 }: Props) => {
   const PlaceholderIcon = isIndividual ? UserIcon : GroupIcon
 
-  const hasTabs = !!aboutText || !!(externalUrls && externalUrls.length)
+  const hasTabs = !!aboutText || (externalUrls && externalUrls.length)
+
+  const renderLinksTab = (urls?: string[]): ReactNode => {
+    if (!(urls && urls.length)) {
+      return null
+    }
+
+    const items = urls.map((url, id) => ({
+      id,
+      title: url,
+      icon: <LinkIcon size="large" />,
+    }))
+
+    const handleSelectItem = (id: number): void => {
+      onSelectUrl(urls[id])
+    }
+
+    return (
+      <Tab title="Links">
+        <Box margin={{ top: 'medium' }}>
+          <ResourceList items={items} onSelectItem={handleSelectItem} />
+        </Box>
+      </Tab>
+    )
+  }
 
   return (
     <Box fill pad="medium" align="center">
@@ -54,20 +78,7 @@ const ArtistUI: FC<Props> = ({
                 </Box>
               </Tab>
             )}
-            {externalUrls && externalUrls.length && (
-              <Tab title="Links">
-                <Box margin={{ top: 'medium' }} gap="medium">
-                  {externalUrls.map((url, i) => (
-                    <ResourceListItem
-                      key={i}
-                      title={url}
-                      icon={<LinkIcon size="large" />}
-                      onSelect={(): void => onSelectUrl(url)}
-                    />
-                  ))}
-                </Box>
-              </Tab>
-            )}
+            {renderLinksTab(externalUrls)}
           </Tabs>
         </Box>
       )}
