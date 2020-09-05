@@ -14,6 +14,8 @@ export type DiscogsSearchResult = {
   thumb: string
 }
 
+// SEARCH
+
 type SearchResponse = {
   status: number
   statusText: string
@@ -45,6 +47,8 @@ export const search: Search = async ({ query, type }) => {
   })
 }
 
+// ARTIST
+
 export type FetchArtistResponseData = {
   name: string
   profile?: string
@@ -62,7 +66,7 @@ type FetchArtistResponse = {
 }
 
 type FetchArtistParams = {
-  id: string | undefined
+  id: number
 }
 
 interface FetchArtist {

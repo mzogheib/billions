@@ -6,7 +6,7 @@ import { fetchArtist, FetchArtistResponseData } from '../../services/discogs'
 import ArtistUI from './ArtistUI'
 
 type HandleFetchArtistParams = {
-  id: string
+  id: number
 }
 
 interface HandleFetchArtist {
@@ -31,7 +31,7 @@ const Artist: FC = () => {
 
   useEffect(() => {
     if (artistId) {
-      handleFetchArtist({ id: artistId })
+      handleFetchArtist({ id: Number(artistId) })
     }
   }, [artistId])
 
