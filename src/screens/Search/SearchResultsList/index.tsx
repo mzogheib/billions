@@ -1,16 +1,17 @@
 import React, { FC } from 'react'
-import { Box } from 'grommet'
+import { Box, Text } from 'grommet'
+import { Disc } from 'grommet-icons'
 
 import ResourceListItem, {
-  DataProps as ResourceListItemProps,
   ResourceListItemPlaceholder,
 } from '../../../components/ResourceList/ResourceListItem'
 
-// Need an id to add as the key for each list item
-export type ResourceListItems = (ResourceListItemProps & { id: number })[]
-
 interface Props {
-  results: ResourceListItems
+  results: {
+    id: number
+    title: string
+    imageUrl: string
+  }[]
   onSelectResult: (id: number) => void
 }
 
@@ -19,8 +20,9 @@ const SearchResultsList: FC<Props> = ({ results, onSelectResult }: Props) => (
     {results.map(({ id, title, imageUrl }) => (
       <ResourceListItem
         key={id}
-        title={title}
+        title={<Text truncate={true}>{title}</Text>}
         imageUrl={imageUrl}
+        icon={<Disc size="large" />}
         onSelect={(): void => onSelectResult(id)}
       />
     ))}

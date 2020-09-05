@@ -1,12 +1,12 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { Text, Box, Image } from 'grommet'
-import { Disc as DiscIcon } from 'grommet-icons'
 
 import LoadingBox from '../../../components/LoadingBox'
 
-export interface DataProps {
+interface DataProps {
   imageUrl?: string
-  title: string
+  icon: ReactNode
+  title: ReactNode
 }
 
 interface FunctionProps {
@@ -15,7 +15,12 @@ interface FunctionProps {
 
 type Props = DataProps & FunctionProps
 
-const ResourceListItem: FC<Props> = ({ imageUrl, title, onSelect }: Props) => (
+const ResourceListItem: FC<Props> = ({
+  imageUrl,
+  icon,
+  title,
+  onSelect,
+}: Props) => (
   <Box
     background="white"
     pad="medium"
@@ -26,11 +31,7 @@ const ResourceListItem: FC<Props> = ({ imageUrl, title, onSelect }: Props) => (
     onClick={onSelect}
   >
     <Box flex="grow" width={{ max: 'xxsmall' }} height="xxsmall">
-      {imageUrl ? (
-        <Image src={imageUrl} fit="contain" />
-      ) : (
-        <DiscIcon size="large" />
-      )}
+      {imageUrl ? <Image src={imageUrl} fit="contain" /> : icon}
     </Box>
     <Text truncate={true}>{title}</Text>
   </Box>
