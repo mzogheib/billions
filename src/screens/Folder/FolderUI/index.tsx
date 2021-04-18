@@ -2,19 +2,13 @@ import React, { FC, ReactNode } from 'react'
 import { Box, Text } from 'grommet'
 import { Folder as FolderIcon } from 'grommet-icons'
 import ResourceList from '../../../components/ResourceList'
-
-type Folder = {
-  id: number
-  name: string
-  count: number
-}
+import { Folder } from '../../../services/discogs'
 
 interface Props {
   collectionFolderList?: Folder[]
 }
 
 const CollectionFolderUI: FC<Props> = ({ collectionFolderList }: Props) => {
-  console.log('folderUI')
   const renderCollection = (folders?: Folder[]): ReactNode => {
     if (!(folders && folders.length)) {
       return null

@@ -18,13 +18,11 @@ interface HandleFetchCollectionFolder {
 }
 
 const Folder: FC = () => {
-  console.log('folder')
-
   const { folderId } = useParams<{ folderId: string }>()
 
   const [
-    collectionFolder,
-    setCollectionFolder,
+    folder,
+    setFolder,
   ] = useState<FetchCollectionFolderReleasesResponseData | null>(null)
   const [isLoading, setLoading] = useState(false)
 
@@ -37,7 +35,7 @@ const Folder: FC = () => {
     const response = await fetchCollectionFolderReleases({ username, folderId })
     const collectionFolderResponse = response.data
 
-    setCollectionFolder(collectionFolderResponse)
+    setFolder(collectionFolderResponse)
     setLoading(false)
   }
 
@@ -59,10 +57,10 @@ const Folder: FC = () => {
     )
   }
 
-  if (!collectionFolder) {
+  if (!folder) {
     return (
       <Box fill pad="medium">
-        No collection found
+        No folder found
       </Box>
     )
   }

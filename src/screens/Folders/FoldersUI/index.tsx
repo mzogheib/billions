@@ -15,7 +15,7 @@ interface Props {
 }
 
 const FoldersUI: FC<Props> = ({ folderList, onSelectFolder }: Props) => {
-  const renderCollection = (folders?: Folder[]): ReactNode => {
+  const renderFolders = (folders?: Folder[]): ReactNode => {
     if (!(folders && folders.length)) {
       return null
     }
@@ -39,7 +39,7 @@ const FoldersUI: FC<Props> = ({ folderList, onSelectFolder }: Props) => {
   return (
     <Box fill pad="medium" align="center">
       <Box margin={{ top: 'medium' }} fill>
-        {renderCollection(folderList)}
+        {renderFolders(folderList)}
       </Box>
     </Box>
   )

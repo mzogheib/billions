@@ -130,12 +130,14 @@ export const fetchMaster: FetchMaster = async ({ id }) => {
 
 // COLLECTION
 
+export type Folder = {
+  id: number
+  name: string
+  count: number
+}
+
 export type FetchCollectionResponseData = {
-  folders?: {
-    id: number
-    name: string
-    count: number
-  }[]
+  folders?: Folder[]
 }
 
 type FetchCollectionResponse = FetchResponse<FetchCollectionResponseData>

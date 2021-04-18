@@ -12,7 +12,7 @@ const MainScreen: FC = () => {
   }
 
   const handleClickCollection = (): void => {
-    push('/collection')
+    push('/folders')
   }
 
   return (
