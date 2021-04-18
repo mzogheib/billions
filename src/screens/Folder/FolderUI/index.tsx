@@ -10,11 +10,11 @@ type Folder = {
 }
 
 interface Props {
-  folderList?: Folder[]
-  onSelectFolder: (id: number) => void
+  collectionFolderList?: Folder[]
 }
 
-const CollectionUI: FC<Props> = ({ folderList, onSelectFolder }: Props) => {
+const CollectionFolderUI: FC<Props> = ({ collectionFolderList }: Props) => {
+  console.log('folderUI')
   const renderCollection = (folders?: Folder[]): ReactNode => {
     if (!(folders && folders.length)) {
       return null
@@ -33,16 +33,16 @@ const CollectionUI: FC<Props> = ({ folderList, onSelectFolder }: Props) => {
       icon: <FolderIcon size="large" />,
     }))
 
-    return <ResourceList items={items} onSelectItem={onSelectFolder} />
+    return <ResourceList items={items} />
   }
 
   return (
     <Box fill pad="medium" align="center">
       <Box margin={{ top: 'medium' }} fill>
-        {renderCollection(folderList)}
+        {renderCollection(collectionFolderList)}
       </Box>
     </Box>
   )
 }
 
-export default CollectionUI
+export default CollectionFolderUI

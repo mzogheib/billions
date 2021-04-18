@@ -8,6 +8,7 @@ import Search from './screens/Search'
 import Artist from './screens/Artist'
 import Release from './screens/Release'
 import Collection from './screens/Collection'
+import Folder from './screens/Folder'
 import ScreenWrapper from './components/ScreenWrapper'
 
 const App: FC = () => {
@@ -33,9 +34,14 @@ const App: FC = () => {
               <Release />
             </ScreenWrapper>
           </Route>
-          <Route path="/collection">
+          <Route exact path={['/collection', '/collection/']}>
             <ScreenWrapper>
               <Collection />
+            </ScreenWrapper>
+          </Route>
+          <Route path="/folders/:folderId">
+            <ScreenWrapper>
+              <Folder />
             </ScreenWrapper>
           </Route>
         </Switch>

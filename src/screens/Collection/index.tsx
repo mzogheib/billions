@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Box } from 'grommet'
 
 import {
@@ -16,6 +17,8 @@ interface HandleFetchCollection {
 }
 
 const Collection: FC = () => {
+  const { push } = useHistory()
+
   const [
     collection,
     setCollection,
@@ -30,6 +33,10 @@ const Collection: FC = () => {
 
     setCollection(collectionResponse)
     setLoading(false)
+  }
+
+  const handleSelectFolder = (folderId: number): void => {
+    push(`/folders/${folderId}`)
   }
 
   useEffect(() => {
@@ -52,7 +59,12 @@ const Collection: FC = () => {
     )
   }
 
-  return <CollectionUI folderList={collection.folders} />
+  return (
+    <CollectionUI
+      folderList={collection.folders}
+      onSelectFolder={handleSelectFolder}
+    />
+  )
 }
 
 export default Collection

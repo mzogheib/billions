@@ -160,3 +160,44 @@ export const fetchCollection: FetchCollection = async ({ username }) => {
     },
   })
 }
+
+// COLLECTION FOLDER RELEASES
+
+export type FetchCollectionFolderReleasesResponseData = {
+  folders?: {
+    id: number
+    name: string
+    count: number
+  }[]
+}
+
+type FetchCollectionFolderReleasesResponse = FetchResponse<
+  FetchCollectionFolderReleasesResponseData
+>
+
+type FetchCollectionFolderReleasesParams = {
+  username: string
+  folderId: number
+}
+
+interface FetchCollectionFolderReleases {
+  (params: FetchCollectionFolderReleasesParams): Promise<
+    FetchCollectionFolderReleasesResponse
+  >
+}
+
+export const fetchCollectionFolderReleases: FetchCollectionFolderReleases = async ({
+  username,
+  folderId,
+}) => {
+  const token = process.env.REACT_APP_DISCOGS_TOKEN as string
+
+  // TODO: handle errors
+  return await axios.request({
+    method: 'GET',
+    url: `${baseUrl}/users/${username}/collection/folders/${folderId}/releases`,
+    headers: {
+      Authorization: `Discogs token=${token}`,
+    },
+  })
+}
