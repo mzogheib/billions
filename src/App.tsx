@@ -7,7 +7,7 @@ import MainScreen from './screens/MainScreen'
 import Search from './screens/Search'
 import Artist from './screens/Artist'
 import Release from './screens/Release'
-import Collection from './screens/Collection'
+import Folders from './screens/Folders'
 import Folder from './screens/Folder'
 import ScreenWrapper from './components/ScreenWrapper'
 
@@ -34,9 +34,9 @@ const App: FC = () => {
               <Release />
             </ScreenWrapper>
           </Route>
-          <Route exact path={['/collection', '/collection/']}>
+          <Route exact path={['/folders', '/folders/']}>
             <ScreenWrapper>
-              <Collection />
+              <Folders />
             </ScreenWrapper>
           </Route>
           <Route path="/folders/:folderId">

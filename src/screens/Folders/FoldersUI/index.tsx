@@ -14,7 +14,7 @@ interface Props {
   onSelectFolder: (id: number) => void
 }
 
-const CollectionUI: FC<Props> = ({ folderList, onSelectFolder }: Props) => {
+const FoldersUI: FC<Props> = ({ folderList, onSelectFolder }: Props) => {
   const renderCollection = (folders?: Folder[]): ReactNode => {
     if (!(folders && folders.length)) {
       return null
@@ -45,4 +45,4 @@ const CollectionUI: FC<Props> = ({ folderList, onSelectFolder }: Props) => {
   )
 }
 
-export default CollectionUI
+export default FoldersUI

@@ -6,7 +6,7 @@ import {
   fetchCollection,
   FetchCollectionResponseData,
 } from '../../services/discogs'
-import CollectionUI from './CollectionUI'
+import FoldersUI from './FoldersUI'
 
 type HandleFetchCollectionParams = {
   username: string
@@ -16,7 +16,7 @@ interface HandleFetchCollection {
   (params: HandleFetchCollectionParams): Promise<void>
 }
 
-const Collection: FC = () => {
+const Folders: FC = () => {
   const { push } = useHistory()
 
   const [
@@ -60,11 +60,11 @@ const Collection: FC = () => {
   }
 
   return (
-    <CollectionUI
+    <FoldersUI
       folderList={collection.folders}
       onSelectFolder={handleSelectFolder}
     />
   )
 }
 
-export default Collection
+export default Folders
