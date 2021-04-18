@@ -127,3 +127,36 @@ export const fetchMaster: FetchMaster = async ({ id }) => {
     },
   })
 }
+
+// COLLECTION
+
+export type FetchCollectionResponseData = {
+  folders?: {
+    id: number
+    name: string
+    count: number
+  }[]
+}
+
+type FetchCollectionResponse = FetchResponse<FetchCollectionResponseData>
+
+type FetchCollectionParams = {
+  username: string
+}
+
+interface FetchCollection {
+  (params: FetchCollectionParams): Promise<FetchCollectionResponse>
+}
+
+export const fetchCollection: FetchCollection = async ({ username }) => {
+  const token = process.env.REACT_APP_DISCOGS_TOKEN as string
+
+  // TODO: handle errors
+  return await axios.request({
+    method: 'GET',
+    url: `${baseUrl}/users/${username}/collection/folders`,
+    headers: {
+      Authorization: `Discogs token=${token}`,
+    },
+  })
+}

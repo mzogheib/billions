@@ -5,9 +5,10 @@ import TextLogo from '../../../components/TextLogo'
 
 interface Props {
   onSubmit: (searchTerm: string) => void
+  onClickCollection: () => void
 }
 
-const MainScreenUI: FC<Props> = ({ onSubmit }: Props) => {
+const MainScreenUI: FC<Props> = ({ onSubmit, onClickCollection }: Props) => {
   const [searchTerm, setSearchTerm] = useState<string | undefined>()
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -32,6 +33,7 @@ const MainScreenUI: FC<Props> = ({ onSubmit }: Props) => {
 
   return (
     <Box fill pad="large" justify="center" align="center">
+      <Box height="33.33%" />
       <Form onSubmit={handleSubmit}>
         <Box gap="xlarge" align="center">
           <TextLogo size="xxlarge" />
@@ -43,6 +45,9 @@ const MainScreenUI: FC<Props> = ({ onSubmit }: Props) => {
           </Box>
         </Box>
       </Form>
+      <Box height="33.33%" justify="end">
+        <Button onClick={onClickCollection} label="My Collection" />
+      </Box>
     </Box>
   )
 }

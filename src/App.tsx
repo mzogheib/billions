@@ -7,6 +7,7 @@ import MainScreen from './screens/MainScreen'
 import Search from './screens/Search'
 import Artist from './screens/Artist'
 import Release from './screens/Release'
+import Collection from './screens/Collection'
 import ScreenWrapper from './components/ScreenWrapper'
 
 const App: FC = () => {
@@ -30,6 +31,11 @@ const App: FC = () => {
           <Route path="/releases/:releaseId">
             <ScreenWrapper>
               <Release />
+            </ScreenWrapper>
+          </Route>
+          <Route path="/collection">
+            <ScreenWrapper>
+              <Collection />
             </ScreenWrapper>
           </Route>
         </Switch>
