@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Box } from 'grommet'
 
 import { fetchMaster, FetchMasterResponseData } from '../../services/discogs'
-import ReleaseUI from './ReleaseUI'
+import ReleaseUI, { ReleaseUIPlaceholder } from './ReleaseUI'
 
 type HandleFetchReleaseParams = {
   id: number
@@ -35,11 +35,7 @@ const Release: FC = () => {
   }, [releaseId])
 
   if (isLoading) {
-    return (
-      <Box fill pad="medium">
-        Loading...
-      </Box>
-    )
+    return <ReleaseUIPlaceholder />
   }
 
   if (!release) {

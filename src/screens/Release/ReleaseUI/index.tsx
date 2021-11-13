@@ -2,6 +2,7 @@ import React, { FC, ReactNode } from 'react'
 import { Box, Image, Heading, Text } from 'grommet'
 import { Disc as DiscIcon } from 'grommet-icons'
 import ResourceList from '../../../components/ResourceList'
+import LoadingBox from '../../../components/LoadingBox'
 
 type Track = {
   position: string
@@ -69,5 +70,26 @@ const ReleaseUI: FC<Props> = ({
     </Box>
   )
 }
+
+export const ReleaseUIPlaceholder: FC = () => (
+  <Box fill pad="medium" align="center">
+    <Box flex="grow" width={{ max: 'small' }} height="small">
+      <DiscIcon size="100%" />
+    </Box>
+    <Heading textAlign="center">
+      <LoadingBox width="medium" />
+    </Heading>
+    <Heading level="2" textAlign="center">
+      <LoadingBox width="xsmall" />
+    </Heading>
+    <Box margin={{ top: 'medium' }} fill>
+      <ResourceList
+        items={[]}
+        numPlaceholders={5}
+        shouldShowPlaceholders={true}
+      />
+    </Box>
+  </Box>
+)
 
 export default ReleaseUI
