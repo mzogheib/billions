@@ -1,6 +1,6 @@
 import { discogsRequest } from './core'
 
-const username = process.env.REACT_APP_USERNAME as string
+const username = process.env.REACT_APP_DISCOGS_USERNAME as string
 
 export type Folder = {
   id: number
