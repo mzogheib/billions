@@ -1,5 +1,7 @@
 import { discogsRequest } from './core'
 
+const username = process.env.REACT_APP_USERNAME as string
+
 export type Folder = {
   id: number
   name: string
@@ -10,13 +12,9 @@ export type FetchCollectionResponseData = {
   folders?: Folder[]
 }
 
-type FetchCollectionParams = {
-  username: string
-}
-
 interface FetchCollection {
-  (params: FetchCollectionParams): Promise<FetchCollectionResponseData>
+  (): Promise<FetchCollectionResponseData>
 }
 
-export const fetchCollection: FetchCollection = ({ username }) =>
+export const fetchCollection: FetchCollection = () =>
   discogsRequest({ endpoint: `/users/${username}/collection/folders` })
