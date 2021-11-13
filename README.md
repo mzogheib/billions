@@ -50,7 +50,7 @@ feat: New results page
 
 ```bash
 yarn release
-yarn publish
+yarn publish-release
 ```
 
 ## TODO
