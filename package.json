@@ -27,7 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "release": "standard-version",
-    "publish-release": "git push --follow-tags origin master"
+    "publish-release": "git push --follow-tags origin master",
+    "type-check": "tsc --noEmit"
   },
   "husky": {
     "hooks": {
