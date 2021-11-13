@@ -14,7 +14,7 @@ interface HandleFetchArtist {
 }
 
 const Artist: FC = () => {
-  const { artistId } = useParams()
+  const { artistId } = useParams<{ artistId: string }>()
 
   const [artist, setArtist] = useState<FetchArtistResponseData | null>(null)
   const [isLoading, setLoading] = useState(false)
