@@ -22,10 +22,9 @@ const Folders: FC = () => {
   const handleFetchCollection: HandleFetchCollection = async ({ username }) => {
     setLoading(true)
 
-    const response = await fetchCollection({ username })
-    const collectionResponse = response.data
+    const { folders } = await fetchCollection({ username })
 
-    setFolders(collectionResponse?.folders)
+    setFolders(folders)
     setLoading(false)
   }
 

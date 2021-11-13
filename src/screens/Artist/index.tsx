@@ -23,9 +23,8 @@ const Artist: FC = () => {
     setLoading(true)
 
     const response = await fetchArtist({ id })
-    const artistResponse = response.data
 
-    setArtist(artistResponse)
+    setArtist(response)
     setLoading(false)
   }
 

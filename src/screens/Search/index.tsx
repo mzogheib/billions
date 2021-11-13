@@ -39,7 +39,7 @@ const Search: FC = () => {
       query: searchQuery,
       type: searchFilter.type,
     })
-    const results = response.data.results
+    const results = response.results
     setSearchResults(results)
 
     setLoading(false)

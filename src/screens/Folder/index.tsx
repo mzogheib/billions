@@ -31,13 +31,12 @@ const Folder: FC = () => {
   }) => {
     setLoading(true)
 
-    const response = await fetchCollectionFolderReleases({
+    const { releases } = await fetchCollectionFolderReleases({
       username,
       folderId,
     })
-    const releasesResponse = response.data.releases
 
-    setFolderReleases(releasesResponse)
+    setFolderReleases(releases)
     setLoading(false)
   }
 

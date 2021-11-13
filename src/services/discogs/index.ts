@@ -1,28 +1,31 @@
-import axios, { Method } from 'axios'
-
 type DiscogsRequest = {
   endpoint: string
-  method?: Method
   params?: Record<string, string>
 }
 
-const discogsRequest = <T>({
+const discogsRequest = async <T>({
   endpoint,
-  method = 'GET',
   params,
 }: DiscogsRequest): Promise<T> => {
   const token = process.env.REACT_APP_DISCOGS_TOKEN as string
   const baseUrl = 'https://api.discogs.com'
 
-  // TODO: handle errors
-  return axios.request({
-    method,
-    url: `${baseUrl}${endpoint}`,
-    headers: {
-      Authorization: `Discogs token=${token}`,
-    },
-    params,
-  })
+  const search =
+    params && Object.keys(params).length && new URLSearchParams(params)
+  const searchString = search ? `?${search.toString()}` : undefined
+  const url = `${baseUrl}${endpoint}${searchString}`
+
+  const fetchOptions = {
+    headers: new Headers({ Authorization: `Discogs token=${token}` }),
+  }
+
+  const data = await fetch(url, fetchOptions)
+
+  if (data.ok) {
+    return data.json()
+  } else {
+    throw data.json()
+  }
 }
 
 export enum DiscogsSearchType {
@@ -37,19 +40,11 @@ export type DiscogsSearchResult = {
   thumb: string
 }
 
-type FetchResponse<ResponseData> = {
-  status: number
-  statusText: string
-  data: ResponseData
-}
-
 // SEARCH
 
 type SearchResponseData = {
   results: DiscogsSearchResult[]
 }
-
-type SearchResponse = FetchResponse<SearchResponseData>
 
 type SearchParams = {
   query: string
@@ -57,7 +52,7 @@ type SearchParams = {
 }
 
 interface Search {
-  (params: SearchParams): Promise<SearchResponse>
+  (params: SearchParams): Promise<SearchResponseData>
 }
 
 export const search: Search = ({ query, type }) =>
@@ -78,14 +73,12 @@ export type FetchArtistResponseData = {
   urls?: string[]
 }
 
-type FetchArtistResponse = FetchResponse<FetchArtistResponseData>
-
 type FetchArtistParams = {
   id: number
 }
 
 interface FetchArtist {
-  (params: FetchArtistParams): Promise<FetchArtistResponse>
+  (params: FetchArtistParams): Promise<FetchArtistResponseData>
 }
 
 export const fetchArtist: FetchArtist = ({ id }) =>
@@ -112,14 +105,12 @@ export type FetchMasterResponseData = {
   }[]
 }
 
-type FetchMasterResponse = FetchResponse<FetchMasterResponseData>
-
 type FetchMasterParams = {
   id: number
 }
 
 interface FetchMaster {
-  (params: FetchMasterParams): Promise<FetchMasterResponse>
+  (params: FetchMasterParams): Promise<FetchMasterResponseData>
 }
 
 export const fetchMaster: FetchMaster = ({ id }) =>
@@ -139,14 +130,12 @@ export type FetchCollectionResponseData = {
   folders?: Folder[]
 }
 
-type FetchCollectionResponse = FetchResponse<FetchCollectionResponseData>
-
 type FetchCollectionParams = {
   username: string
 }
 
 interface FetchCollection {
-  (params: FetchCollectionParams): Promise<FetchCollectionResponse>
+  (params: FetchCollectionParams): Promise<FetchCollectionResponseData>
 }
 
 export const fetchCollection: FetchCollection = ({ username }) =>
@@ -175,10 +164,6 @@ export type FetchCollectionFolderReleasesResponseData = {
   releases: CollectionFolderRelease[]
 }
 
-type FetchCollectionFolderReleasesResponse = FetchResponse<
-  FetchCollectionFolderReleasesResponseData
->
-
 type FetchCollectionFolderReleasesParams = {
   username: string
   folderId: number
@@ -186,7 +171,7 @@ type FetchCollectionFolderReleasesParams = {
 
 interface FetchCollectionFolderReleases {
   (params: FetchCollectionFolderReleasesParams): Promise<
-    FetchCollectionFolderReleasesResponse
+    FetchCollectionFolderReleasesResponseData
   >
 }
 

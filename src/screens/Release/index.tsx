@@ -23,9 +23,8 @@ const Release: FC = () => {
     setLoading(true)
 
     const response = await fetchMaster({ id })
-    const releaseResponse = response.data
 
-    setRelease(releaseResponse)
+    setRelease(response)
     setLoading(false)
   }
 
