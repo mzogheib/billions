@@ -9,7 +9,7 @@ export type Folder = {
 }
 
 export type FetchCollectionResponseData = {
-  folders?: Folder[]
+  folders: Folder[]
 }
 
 interface FetchCollection {

@@ -10,16 +10,17 @@ type Folder = {
 }
 
 interface Props {
-  folderList?: Folder[]
+  folderList: Folder[]
+  isLoading: boolean
   onSelectFolder: (id: number) => void
 }
 
-const FoldersUI: FC<Props> = ({ folderList, onSelectFolder }: Props) => {
-  const renderFolders = (folders?: Folder[]): ReactNode => {
-    if (!(folders && folders.length)) {
-      return null
-    }
-
+const FoldersUI: FC<Props> = ({
+  folderList,
+  isLoading,
+  onSelectFolder,
+}: Props) => {
+  const renderFolders = (folders: Folder[]): ReactNode => {
     const items = folders.map(({ id, name, count }) => ({
       id,
       title: (
@@ -33,7 +34,13 @@ const FoldersUI: FC<Props> = ({ folderList, onSelectFolder }: Props) => {
       icon: <FolderIcon size="large" />,
     }))
 
-    return <ResourceList items={items} onSelectItem={onSelectFolder} />
+    return (
+      <ResourceList
+        items={items}
+        shouldShowPlaceholders={isLoading}
+        onSelectItem={onSelectFolder}
+      />
+    )
   }
 
   return (
