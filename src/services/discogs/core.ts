@@ -12,7 +12,7 @@ export const discogsRequest = async <T>({
 
   const search =
     params && Object.keys(params).length && new URLSearchParams(params)
-  const searchString = search ? `?${search.toString()}` : undefined
+  const searchString = search ? `?${search.toString()}` : ''
   const url = `${baseUrl}${endpoint}${searchString}`
 
   const fetchOptions = {
