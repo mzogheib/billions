@@ -1,6 +1,30 @@
-import axios from 'axios'
+import axios, { Method } from 'axios'
 
 const baseUrl = 'https://api.discogs.com'
+
+type DiscogsRequest = {
+  endpoint: string
+  method?: Method
+  params?: Record<string, string>
+}
+
+const discogsRequest = <T>({
+  endpoint,
+  method = 'GET',
+  params,
+}: DiscogsRequest): Promise<T> => {
+  const token = process.env.REACT_APP_DISCOGS_TOKEN as string
+
+  // TODO: handle errors
+  return axios.request({
+    method,
+    url: `${baseUrl}${endpoint}`,
+    headers: {
+      Authorization: `Discogs token=${token}`,
+    },
+    params,
+  })
+}
 
 export enum DiscogsSearchType {
   artist = 'artist',
@@ -37,19 +61,11 @@ interface Search {
   (params: SearchParams): Promise<SearchResponse>
 }
 
-export const search: Search = async ({ query, type }) => {
-  const token = process.env.REACT_APP_DISCOGS_TOKEN as string
-
-  // TODO: handle errors
-  return await axios.request({
-    method: 'GET',
-    url: `${baseUrl}/database/search`,
-    headers: {
-      Authorization: `Discogs token=${token}`,
-    },
+export const search: Search = ({ query, type }) =>
+  discogsRequest({
+    endpoint: '/database/search',
     params: { q: query, type },
   })
-}
 
 // ARTIST
 
@@ -73,18 +89,10 @@ interface FetchArtist {
   (params: FetchArtistParams): Promise<FetchArtistResponse>
 }
 
-export const fetchArtist: FetchArtist = async ({ id }) => {
-  const token = process.env.REACT_APP_DISCOGS_TOKEN as string
-
-  // TODO: handle errors
-  return await axios.request({
-    method: 'GET',
-    url: `${baseUrl}/artists/${id}`,
-    headers: {
-      Authorization: `Discogs token=${token}`,
-    },
+export const fetchArtist: FetchArtist = ({ id }) =>
+  discogsRequest({
+    endpoint: `/artists/${id}`,
   })
-}
 
 // MASTER
 
@@ -115,18 +123,10 @@ interface FetchMaster {
   (params: FetchMasterParams): Promise<FetchMasterResponse>
 }
 
-export const fetchMaster: FetchMaster = async ({ id }) => {
-  const token = process.env.REACT_APP_DISCOGS_TOKEN as string
-
-  // TODO: handle errors
-  return await axios.request({
-    method: 'GET',
-    url: `${baseUrl}/masters/${id}`,
-    headers: {
-      Authorization: `Discogs token=${token}`,
-    },
+export const fetchMaster: FetchMaster = ({ id }) =>
+  discogsRequest({
+    endpoint: `/masters/${id}`,
   })
-}
 
 // COLLECTION
 
@@ -150,18 +150,10 @@ interface FetchCollection {
   (params: FetchCollectionParams): Promise<FetchCollectionResponse>
 }
 
-export const fetchCollection: FetchCollection = async ({ username }) => {
-  const token = process.env.REACT_APP_DISCOGS_TOKEN as string
-
-  // TODO: handle errors
-  return await axios.request({
-    method: 'GET',
-    url: `${baseUrl}/users/${username}/collection/folders`,
-    headers: {
-      Authorization: `Discogs token=${token}`,
-    },
+export const fetchCollection: FetchCollection = ({ username }) =>
+  discogsRequest({
+    endpoint: `/users/${username}/collection/folders`,
   })
-}
 
 // COLLECTION FOLDER RELEASES
 
@@ -202,15 +194,7 @@ interface FetchCollectionFolderReleases {
 export const fetchCollectionFolderReleases: FetchCollectionFolderReleases = async ({
   username,
   folderId,
-}) => {
-  const token = process.env.REACT_APP_DISCOGS_TOKEN as string
-
-  // TODO: handle errors
-  return await axios.request({
-    method: 'GET',
-    url: `${baseUrl}/users/${username}/collection/folders/${folderId}/releases`,
-    headers: {
-      Authorization: `Discogs token=${token}`,
-    },
+}) =>
+  discogsRequest({
+    endpoint: `/users/${username}/collection/folders/${folderId}/releases`,
   })
-}
