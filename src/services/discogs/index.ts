@@ -165,12 +165,23 @@ export const fetchCollection: FetchCollection = async ({ username }) => {
 
 // COLLECTION FOLDER RELEASES
 
+export type CollectionFolderRelease = {
+  instance_id: number
+  date_added: string
+  basic_information: {
+    master_id: number
+    cover_image: string
+    year: number
+    title: string
+    artists: {
+      id: number
+      name: string
+    }[]
+  }
+}
+
 export type FetchCollectionFolderReleasesResponseData = {
-  folders?: {
-    id: number
-    name: string
-    count: number
-  }[]
+  releases: CollectionFolderRelease[]
 }
 
 type FetchCollectionFolderReleasesResponse = FetchResponse<

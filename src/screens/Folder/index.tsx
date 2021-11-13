@@ -1,12 +1,11 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Box } from 'grommet'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import {
   fetchCollectionFolderReleases,
-  FetchCollectionFolderReleasesResponseData,
+  CollectionFolderRelease,
 } from '../../services/discogs'
-import CollectionFolderUI from './FolderUI'
+import FolderUI from './FolderUI'
 
 type HandleFetchCollectionFolderParams = {
   username: string
@@ -19,11 +18,11 @@ interface HandleFetchCollectionFolder {
 
 const Folder: FC = () => {
   const { folderId } = useParams<{ folderId: string }>()
+  const { push } = useHistory()
 
-  const [
-    folder,
-    setFolder,
-  ] = useState<FetchCollectionFolderReleasesResponseData | null>(null)
+  const [folderReleases, setFolderReleases] = useState<
+    CollectionFolderRelease[]
+  >([])
   const [isLoading, setLoading] = useState(false)
 
   const handleFetchCollectionFolder: HandleFetchCollectionFolder = async ({
@@ -32,10 +31,13 @@ const Folder: FC = () => {
   }) => {
     setLoading(true)
 
-    const response = await fetchCollectionFolderReleases({ username, folderId })
-    const collectionFolderResponse = response.data
+    const response = await fetchCollectionFolderReleases({
+      username,
+      folderId,
+    })
+    const releasesResponse = response.data.releases
 
-    setFolder(collectionFolderResponse)
+    setFolderReleases(releasesResponse)
     setLoading(false)
   }
 
@@ -49,23 +51,17 @@ const Folder: FC = () => {
     }
   }, [folderId])
 
-  if (isLoading) {
-    return (
-      <Box fill pad="medium">
-        Loading...
-      </Box>
-    )
+  const handleSelectRelease = (id: number): void => {
+    push(`/releases/${id}`)
   }
 
-  if (!folder) {
-    return (
-      <Box fill pad="medium">
-        No folder found
-      </Box>
-    )
-  }
-
-  return <CollectionFolderUI collectionFolderList={[]} />
+  return (
+    <FolderUI
+      releasesList={folderReleases}
+      onSelectRelease={handleSelectRelease}
+      isLoading={isLoading}
+    />
+  )
 }
 
 export default Folder

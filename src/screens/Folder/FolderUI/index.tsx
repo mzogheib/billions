@@ -1,39 +1,44 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC } from 'react'
 import { Box, Text } from 'grommet'
-import { Folder as FolderIcon } from 'grommet-icons'
+import { Disc as DiscIcon } from 'grommet-icons'
 import ResourceList from '../../../components/ResourceList'
-import { Folder } from '../../../services/discogs'
+import { CollectionFolderRelease } from '../../../services/discogs'
 
 interface Props {
-  collectionFolderList?: Folder[]
+  releasesList: CollectionFolderRelease[]
+  isLoading?: boolean
+  onSelectRelease: (id: number) => void
 }
 
-const CollectionFolderUI: FC<Props> = ({ collectionFolderList }: Props) => {
-  const renderCollection = (folders?: Folder[]): ReactNode => {
-    if (!(folders && folders.length)) {
-      return null
-    }
-
-    const items = folders.map(({ id, name, count }) => ({
-      id,
+const CollectionFolderUI: FC<Props> = ({
+  releasesList,
+  isLoading,
+  onSelectRelease,
+}: Props) => {
+  const items = releasesList.map(
+    ({ basic_information: { master_id, title, year, cover_image } }) => ({
+      id: master_id,
+      imageUrl: cover_image,
       title: (
         <Box direction="row" gap="small" fill>
           <Box fill>
-            <Text truncate={true}>{name}</Text>
+            <Text truncate={true}>{title}</Text>
           </Box>
-          <Text>{count}</Text>
+          <Text>{year}</Text>
         </Box>
       ),
-      icon: <FolderIcon size="large" />,
-    }))
-
-    return <ResourceList items={items} />
-  }
+      icon: <DiscIcon size="large" />,
+    })
+  )
 
   return (
     <Box fill pad="medium" align="center">
       <Box margin={{ top: 'medium' }} fill>
-        {renderCollection(collectionFolderList)}
+        <ResourceList
+          items={items}
+          onSelectItem={onSelectRelease}
+          shouldShowPlaceholders={isLoading}
+        />
       </Box>
     </Box>
   )
