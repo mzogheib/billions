@@ -33,7 +33,7 @@ const Folders: FC = () => {
 
   return (
     <FoldersUI
-      folderList={folders}
+      folders={folders}
       isLoading={isLoading}
       onSelectFolder={handleSelectFolder}
     />
