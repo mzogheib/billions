@@ -14,7 +14,7 @@ interface HandleFetchRelease {
 }
 
 const Release: FC = () => {
-  const { releaseId } = useParams()
+  const { releaseId } = useParams<{ releaseId: string }>()
 
   const [release, setRelease] = useState<FetchMasterResponseData | null>(null)
   const [isLoading, setLoading] = useState(false)
@@ -23,9 +23,8 @@ const Release: FC = () => {
     setLoading(true)
 
     const response = await fetchMaster({ id })
-    const releaseResponse = response.data
 
-    setRelease(releaseResponse)
+    setRelease(response)
     setLoading(false)
   }
 

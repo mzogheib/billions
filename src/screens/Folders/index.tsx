@@ -5,12 +5,8 @@ import { Box } from 'grommet'
 import { fetchCollection, Folder } from '../../services/discogs'
 import FoldersUI from './FoldersUI'
 
-type HandleFetchCollectionParams = {
-  username: string
-}
-
 interface HandleFetchCollection {
-  (params: HandleFetchCollectionParams): Promise<void>
+  (): Promise<void>
 }
 
 const Folders: FC = () => {
@@ -19,13 +15,12 @@ const Folders: FC = () => {
   const [folders, setFolders] = useState<Folder[] | undefined>(undefined)
   const [isLoading, setLoading] = useState(false)
 
-  const handleFetchCollection: HandleFetchCollection = async ({ username }) => {
+  const handleFetchCollection: HandleFetchCollection = async () => {
     setLoading(true)
 
-    const response = await fetchCollection({ username })
-    const collectionResponse = response.data
+    const { folders } = await fetchCollection()
 
-    setFolders(collectionResponse?.folders)
+    setFolders(folders)
     setLoading(false)
   }
 
@@ -34,7 +29,7 @@ const Folders: FC = () => {
   }
 
   useEffect(() => {
-    handleFetchCollection({ username: 'mzogheib' })
+    handleFetchCollection()
   }, [])
 
   if (isLoading) {
