@@ -1,7 +1,5 @@
 import axios, { Method } from 'axios'
 
-const baseUrl = 'https://api.discogs.com'
-
 type DiscogsRequest = {
   endpoint: string
   method?: Method
@@ -14,6 +12,7 @@ const discogsRequest = <T>({
   params,
 }: DiscogsRequest): Promise<T> => {
   const token = process.env.REACT_APP_DISCOGS_TOKEN as string
+  const baseUrl = 'https://api.discogs.com'
 
   // TODO: handle errors
   return axios.request({
