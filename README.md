@@ -24,18 +24,33 @@ yarn start
 
 - https://www.robertcooper.me/using-eslint-and-prettier-in-a-typescript-project
 
-## Commit Messages
+## Development & Release Process
 
-- Commit messages follow the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0-beta.4/).
-- They are enforced via [commitlint](https://github.com/conventional-changelog/commitlint) on the `master` branch.
-- GitHub enforces PR titles also follow this specification.
+### Development
 
-## Releases & Changelog
+- Create a feature branch off `master`
+- Develop and commit. Commit messages can be anything, short and meanigful
+- When a feature is complete push the branch to remote and raise a PR
+- Ensure the PR title follows the [commitlint](https://github.com/conventional-changelog/commitlint) specification. An example title is
+
+```
+feat: New results page
+```
+
+- Squash & merge the PR to `master`
+
+#### Notes
+
+- Commit messages on `master` in the CLI are enforced via [commitlint](https://github.com/conventional-changelog/commitlint)
+- PR titles on GitHub are enforced via [Semantic Pull Requests](https://github.com/zeke/semantic-pull-requests)
+
+### Release
 
 - Based on the commit messages [standard-version](https://github.com/conventional-changelog/standard-version) is used to bump version and generate the changelog
 
 ```bash
 yarn release
+yarn publish
 ```
 
 ## TODO
