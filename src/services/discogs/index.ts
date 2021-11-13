@@ -127,3 +127,90 @@ export const fetchMaster: FetchMaster = async ({ id }) => {
     },
   })
 }
+
+// COLLECTION
+
+export type Folder = {
+  id: number
+  name: string
+  count: number
+}
+
+export type FetchCollectionResponseData = {
+  folders?: Folder[]
+}
+
+type FetchCollectionResponse = FetchResponse<FetchCollectionResponseData>
+
+type FetchCollectionParams = {
+  username: string
+}
+
+interface FetchCollection {
+  (params: FetchCollectionParams): Promise<FetchCollectionResponse>
+}
+
+export const fetchCollection: FetchCollection = async ({ username }) => {
+  const token = process.env.REACT_APP_DISCOGS_TOKEN as string
+
+  // TODO: handle errors
+  return await axios.request({
+    method: 'GET',
+    url: `${baseUrl}/users/${username}/collection/folders`,
+    headers: {
+      Authorization: `Discogs token=${token}`,
+    },
+  })
+}
+
+// COLLECTION FOLDER RELEASES
+
+export type CollectionFolderRelease = {
+  instance_id: number
+  date_added: string
+  basic_information: {
+    master_id: number
+    cover_image: string
+    year: number
+    title: string
+    artists: {
+      id: number
+      name: string
+    }[]
+  }
+}
+
+export type FetchCollectionFolderReleasesResponseData = {
+  releases: CollectionFolderRelease[]
+}
+
+type FetchCollectionFolderReleasesResponse = FetchResponse<
+  FetchCollectionFolderReleasesResponseData
+>
+
+type FetchCollectionFolderReleasesParams = {
+  username: string
+  folderId: number
+}
+
+interface FetchCollectionFolderReleases {
+  (params: FetchCollectionFolderReleasesParams): Promise<
+    FetchCollectionFolderReleasesResponse
+  >
+}
+
+export const fetchCollectionFolderReleases: FetchCollectionFolderReleases = async ({
+  username,
+  folderId,
+}) => {
+  const token = process.env.REACT_APP_DISCOGS_TOKEN as string
+
+  // TODO: handle errors
+  return await axios.request({
+    method: 'GET',
+    url: `${baseUrl}/users/${username}/collection/folders/${folderId}/releases`,
+    headers: {
+      Authorization: `Discogs token=${token}`,
+    },
+  })
+}

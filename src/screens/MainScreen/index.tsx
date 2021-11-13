@@ -11,7 +11,16 @@ const MainScreen: FC = () => {
     push(`/search?${makeQueryParams({ query })}`)
   }
 
-  return <MainScreenUI onSubmit={handleSubmit} />
+  const handleClickCollection = (): void => {
+    push('/folders')
+  }
+
+  return (
+    <MainScreenUI
+      onSubmit={handleSubmit}
+      onClickCollection={handleClickCollection}
+    />
+  )
 }
 
 export default MainScreen
