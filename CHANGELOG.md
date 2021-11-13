@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/mzogheib/billions/compare/v1.6.2...v1.7.0) (2021-11-13)
+
+### Features
+
+- Add collections ([#34](https://github.com/mzogheib/billions/issues/34)) ([19bebf5](https://github.com/mzogheib/billions/commit/19bebf597ccef0b9e5f6a4d9b27da74db9fec059))
+
 ### [1.6.2](https://github.com/mzogheib/billions/compare/v1.6.1...v1.6.2) (2020-09-06)
 
 ### [1.6.1](https://github.com/mzogheib/billions/compare/v1.6.0...v1.6.1) (2020-09-06)
