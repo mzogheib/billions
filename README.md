@@ -26,9 +26,18 @@ yarn start
 
 ## Development & Release Process
 
+### Pre-development
+
+- Create an issue in GitHub describing the required changes
+
 ### Development
 
-- Create a feature branch off `master`
+- Create a feature branch off `master` and reference the issue number in the name, e.g.
+
+```
+git checkout -b ISSUE/#23
+```
+
 - Develop and commit. Commit messages can be anything, short and meanigful
 - When a feature is complete push the branch to remote and raise a PR
 - Ensure the PR title follows the [commitlint](https://github.com/conventional-changelog/commitlint) specification. An example title is
