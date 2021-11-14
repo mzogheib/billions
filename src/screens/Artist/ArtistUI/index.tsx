@@ -6,6 +6,7 @@ import {
   Link as LinkIcon,
 } from 'grommet-icons'
 import ResourceList from '../../../components/ResourceList'
+import LoadingBox from '../../../components/LoadingBox'
 
 interface Props {
   name: string
@@ -85,5 +86,37 @@ const ArtistUI: FC<Props> = ({
     </Box>
   )
 }
+
+// TODO: improve this. It's a bit sloppy, repetitive and uses magic numbers
+export const ArtistUIPlaceholder: FC = () => (
+  <Box fill pad="medium" align="center">
+    <Box flex="grow" width={{ max: 'small' }} height="small">
+      <UserIcon size="100%" />
+    </Box>
+    <Heading textAlign="center">
+      <LoadingBox width="medium" height="48px" />
+    </Heading>
+    <Box fill>
+      <Tabs>
+        <Tab title={<LoadingBox width="xxsmall" height="18px" />}>
+          <Box
+            background="white"
+            pad="medium"
+            round="medium"
+            margin={{ top: 'medium' }}
+            fill={true}
+          >
+            <LoadingBox width="100%" height="20px" />
+            <LoadingBox width="100%" height="20px" margin={{ top: 'xsmall' }} />
+            <LoadingBox width="100%" height="20px" margin={{ top: 'xsmall' }} />
+            <LoadingBox width="100%" height="20px" margin={{ top: 'xsmall' }} />
+            <LoadingBox width="100%" height="20px" margin={{ top: 'xsmall' }} />
+          </Box>
+        </Tab>
+        <Tab title={<LoadingBox width="xxsmall" height="18px" />} />
+      </Tabs>
+    </Box>
+  </Box>
+)
 
 export default ArtistUI
