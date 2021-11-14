@@ -56,7 +56,7 @@ const Folder: FC = () => {
 
   return (
     <FolderUI
-      releasesList={folderReleases}
+      releases={folderReleases}
       onSelectRelease={handleSelectRelease}
       isLoading={isLoading}
     />

@@ -5,17 +5,17 @@ import ResourceList from '../../../components/ResourceList'
 import { CollectionFolderRelease } from '../../../services/discogs'
 
 interface Props {
-  releasesList: CollectionFolderRelease[]
+  releases: CollectionFolderRelease[]
   isLoading?: boolean
   onSelectRelease: (id: number) => void
 }
 
 const CollectionFolderUI: FC<Props> = ({
-  releasesList,
+  releases,
   isLoading,
   onSelectRelease,
 }: Props) => {
-  const items = releasesList.map(
+  const items = releases.map(
     ({ basic_information: { master_id, title, year, cover_image } }) => ({
       id: master_id,
       imageUrl: cover_image,
