@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/mzogheib/billions/compare/v1.7.4...v1.8.0) (2021-11-14)
+
+### Features
+
+- add more placeholders ([#47](https://github.com/mzogheib/billions/issues/47)) ([3c341e3](https://github.com/mzogheib/billions/commit/3c341e3fa038279a8c8eb1e4a6fb70d9368670a1))
+- use user icon for artist search result ([bb9022d](https://github.com/mzogheib/billions/commit/bb9022d58165d35769ed5b2949e01f1e736e3af3))
+
 ### [1.7.4](https://github.com/mzogheib/billions/compare/v1.7.3...v1.7.4) (2021-11-13)
 
 ### [1.7.3](https://github.com/mzogheib/billions/compare/v1.7.2...v1.7.3) (2021-11-13)
