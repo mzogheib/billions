@@ -1,7 +1,11 @@
 import React, { FC, useState, FormEvent, ChangeEvent } from 'react'
 import styled from 'styled-components'
 import { Box, TextInput, Button, Form, Tabs, Tab } from 'grommet'
-import { Search as SearchIcon, Disc } from 'grommet-icons'
+import {
+  Search as SearchIcon,
+  Disc as DiscIcon,
+  User as UserIcon,
+} from 'grommet-icons'
 
 import ResourceList from '../../../components/ResourceList'
 
@@ -63,11 +67,20 @@ const SearchUI: FC<Props> = ({
   const tabs = [
     {
       title: 'Artists',
+      items: searchResults.map(result => ({
+        ...result,
+        icon: <UserIcon size="large" />,
+      })),
       onSelect: onSelectArtists,
       onSelectResult: onSelectArtist,
     },
     {
       title: 'Releases',
+      items: searchResults.map(result => ({
+        ...result,
+        icon: <DiscIcon size="large" />,
+      })),
+
       onSelect: onSelectReleases,
       onSelectResult: onSelectRelease,
     },
@@ -77,11 +90,6 @@ const SearchUI: FC<Props> = ({
     const { onSelect } = tabs[tabIndex]
     onSelect()
   }
-
-  const listItems = searchResults.map(result => ({
-    ...result,
-    icon: <Disc size="large" />,
-  }))
 
   return (
     <Box fill pad="medium">
@@ -96,11 +104,11 @@ const SearchUI: FC<Props> = ({
         </Box>
       </Form>
       <Tabs onActive={handleSelectTab} margin={{ top: 'small' }}>
-        {tabs.map(({ title, onSelectResult }) => (
+        {tabs.map(({ title, items, onSelectResult }) => (
           <Tab title={title} key={title}>
             <Box margin={{ top: 'medium' }}>
               <ResourceList
-                items={listItems}
+                items={items}
                 shouldShowPlaceholders={isLoading}
                 onSelectItem={onSelectResult}
               />
