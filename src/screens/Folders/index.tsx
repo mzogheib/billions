@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Box } from 'grommet'
 
 import { fetchCollection, Folder } from '../../services/discogs'
 import FoldersUI from './FoldersUI'
@@ -12,7 +11,7 @@ interface HandleFetchCollection {
 const Folders: FC = () => {
   const { push } = useHistory()
 
-  const [folders, setFolders] = useState<Folder[] | undefined>(undefined)
+  const [folders, setFolders] = useState<Folder[]>([])
   const [isLoading, setLoading] = useState(false)
 
   const handleFetchCollection: HandleFetchCollection = async () => {
@@ -32,23 +31,13 @@ const Folders: FC = () => {
     handleFetchCollection()
   }, [])
 
-  if (isLoading) {
-    return (
-      <Box fill pad="medium">
-        Loading...
-      </Box>
-    )
-  }
-
-  if (!folders || !folders.length) {
-    return (
-      <Box fill pad="medium">
-        No collection found
-      </Box>
-    )
-  }
-
-  return <FoldersUI folderList={folders} onSelectFolder={handleSelectFolder} />
+  return (
+    <FoldersUI
+      folders={folders}
+      isLoading={isLoading}
+      onSelectFolder={handleSelectFolder}
+    />
+  )
 }
 
 export default Folders

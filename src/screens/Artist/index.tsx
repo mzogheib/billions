@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Box } from 'grommet'
 
 import { fetchArtist, FetchArtistResponseData } from '../../services/discogs'
-import ArtistUI from './ArtistUI'
+import ArtistUI, { ArtistUIPlaceholder } from './ArtistUI'
 
 type HandleFetchArtistParams = {
   id: number
@@ -35,11 +35,7 @@ const Artist: FC = () => {
   }, [artistId])
 
   if (isLoading) {
-    return (
-      <Box fill pad="medium">
-        Loading...
-      </Box>
-    )
+    return <ArtistUIPlaceholder />
   }
 
   if (!artist) {
