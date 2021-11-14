@@ -1,11 +1,11 @@
 import { discogsRequest } from './core'
 
-export enum DiscogsSearchType {
+export enum SearchType {
   artist = 'artist',
   master = 'master',
 }
 
-export type DiscogsSearchResult = {
+export type SearchResult = {
   id: number
   title: string
   type: string
@@ -13,12 +13,12 @@ export type DiscogsSearchResult = {
 }
 
 type SearchResponseData = {
-  results: DiscogsSearchResult[]
+  results: SearchResult[]
 }
 
 type SearchParams = {
   query: string
-  type: DiscogsSearchType
+  type: SearchType
 }
 
 interface Search {

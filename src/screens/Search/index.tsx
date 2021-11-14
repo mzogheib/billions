@@ -2,15 +2,11 @@ import React, { FC, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { makeQueryParams, useQuery } from '../../utils/routerUtils'
-import {
-  search,
-  DiscogsSearchResult,
-  DiscogsSearchType,
-} from '../../services/discogs'
+import { search, SearchResult, SearchType } from '../../services/discogs'
 import SearchUI, { OnSubmit as SetNewQuery } from './SearchUI'
 
 type SearchFilter = {
-  type: DiscogsSearchType
+  type: SearchType
 }
 
 type HandleSearchParams = {
@@ -25,8 +21,8 @@ interface HandleSearch {
 const Search: FC = () => {
   const { query } = useQuery()
   const { replace, push } = useHistory()
-  const [searchResults, setSearchResults] = useState<DiscogsSearchResult[]>([])
-  const [type, setType] = useState<DiscogsSearchType>(DiscogsSearchType.artist)
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
+  const [type, setType] = useState<SearchType>(SearchType.artist)
   const [isLoading, setLoading] = useState(false)
 
   const handleSearch: HandleSearch = async ({ searchQuery, searchFilter }) => {
@@ -71,8 +67,8 @@ const Search: FC = () => {
   return (
     <SearchUI
       defaultSearchTerm={query}
-      onSelectArtists={(): void => setType(DiscogsSearchType.artist)}
-      onSelectReleases={(): void => setType(DiscogsSearchType.master)}
+      onSelectArtists={(): void => setType(SearchType.artist)}
+      onSelectReleases={(): void => setType(SearchType.master)}
       onSelectArtist={handleSelectArtist}
       onSelectRelease={handleSelectRelease}
       onSubmit={setNewQuery}
