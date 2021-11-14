@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import {
   fetchCollectionFolderReleases,
@@ -17,8 +17,8 @@ interface HandleFetchCollectionFolder {
 }
 
 const Folder: FC = () => {
-  const { folderId } = useParams<{ folderId: string }>()
-  const { push } = useHistory()
+  const { folderId } = useParams()
+  const navigate = useNavigate()
 
   const [folderReleases, setFolderReleases] = useState<
     CollectionFolderRelease[]
@@ -51,7 +51,7 @@ const Folder: FC = () => {
   }, [folderId])
 
   const handleSelectRelease = (id: number): void => {
-    push(`/releases/${id}`)
+    navigate(`/releases/${id}`)
   }
 
   return (

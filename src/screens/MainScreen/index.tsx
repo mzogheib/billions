@@ -1,18 +1,18 @@
 import React, { FC } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { makeQueryParams } from '../../utils/routerUtils'
 import MainScreenUI from './MainScreenUI'
 
 const MainScreen: FC = () => {
-  const { push } = useHistory()
+  const navigate = useNavigate()
 
   const handleSubmit = (query: string): void => {
-    push(`/search?${makeQueryParams({ query })}`)
+    navigate(`/search?${makeQueryParams({ query })}`)
   }
 
   const handleClickCollection = (): void => {
-    push('/folders')
+    navigate('/folders')
   }
 
   return (

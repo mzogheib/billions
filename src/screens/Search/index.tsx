@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { makeQueryParams, useQuery } from '../../utils/routerUtils'
 import { search, SearchResult, SearchType } from '../../services/discogs'
@@ -20,7 +20,7 @@ interface HandleSearch {
 
 const Search: FC = () => {
   const { query } = useQuery()
-  const { replace, push } = useHistory()
+  const navigate = useNavigate()
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
   const [type, setType] = useState<SearchType>(SearchType.artist)
   const [isLoading, setLoading] = useState(false)
@@ -47,15 +47,17 @@ const Search: FC = () => {
 
   const setNewQuery: SetNewQuery = newQuery => {
     if (newQuery === query) return
-    replace(`/search?${makeQueryParams({ query: newQuery })}`)
+    navigate(`/search?${makeQueryParams({ query: newQuery })}`, {
+      replace: true,
+    })
   }
 
   const handleSelectArtist = (id: number): void => {
-    push(`/artists/${id}`)
+    navigate(`/artists/${id}`)
   }
 
   const handleSelectRelease = (id: number): void => {
-    push(`/releases/${id}`)
+    navigate(`/releases/${id}`)
   }
 
   const searchResultsForUI = searchResults.map(({ id, title, thumb }) => ({

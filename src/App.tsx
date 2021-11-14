@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Grommet } from 'grommet'
 import { grommet } from 'grommet/themes'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import MainScreen from './screens/MainScreen'
 import Search from './screens/Search'
@@ -11,43 +11,54 @@ import Folders from './screens/Folders'
 import Folder from './screens/Folder'
 import ScreenWrapper from './components/ScreenWrapper'
 
-const App: FC = () => {
-  return (
-    <Grommet theme={grommet} background="light-1" full>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <MainScreen />
-          </Route>
-          <Route path="/search">
+const App: FC = () => (
+  <Grommet theme={grommet} background="light-1" full>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainScreen />} />
+        <Route
+          path="/search"
+          element={
             <ScreenWrapper>
               <Search />
             </ScreenWrapper>
-          </Route>
-          <Route path="/artists/:artistId">
+          }
+        />
+        <Route
+          path="/artists/:artistId"
+          element={
             <ScreenWrapper>
               <Artist />
             </ScreenWrapper>
-          </Route>
-          <Route path="/releases/:releaseId">
+          }
+        />
+        <Route
+          path="/releases/:releaseId"
+          element={
             <ScreenWrapper>
               <Release />
             </ScreenWrapper>
-          </Route>
-          <Route exact path={['/folders', '/folders/']}>
+          }
+        />
+        <Route
+          path="/folders"
+          element={
             <ScreenWrapper>
               <Folders />
             </ScreenWrapper>
-          </Route>
-          <Route path="/folders/:folderId">
+          }
+        />
+        <Route
+          path="/folders/:folderId"
+          element={
             <ScreenWrapper>
               <Folder />
             </ScreenWrapper>
-          </Route>
-        </Switch>
-      </Router>
-    </Grommet>
-  )
-}
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  </Grommet>
+)
 
 export default App
