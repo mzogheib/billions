@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { fetchCollection, Folder } from '../../services/discogs'
 import FoldersUI from './FoldersUI'
@@ -9,7 +9,7 @@ interface HandleFetchCollection {
 }
 
 const Folders: FC = () => {
-  const { push } = useHistory()
+  const navigate = useNavigate()
 
   const [folders, setFolders] = useState<Folder[]>([])
   const [isLoading, setLoading] = useState(false)
@@ -24,7 +24,7 @@ const Folders: FC = () => {
   }
 
   const handleSelectFolder = (folderId: number): void => {
-    push(`/folders/${folderId}`)
+    navigate(`/folders/${folderId}`)
   }
 
   useEffect(() => {
