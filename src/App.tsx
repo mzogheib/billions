@@ -16,46 +16,13 @@ const App: FC = () => (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainScreen />} />
-        <Route
-          path="/search"
-          element={
-            <ScreenWrapper>
-              <Search />
-            </ScreenWrapper>
-          }
-        />
-        <Route
-          path="/artists/:artistId"
-          element={
-            <ScreenWrapper>
-              <Artist />
-            </ScreenWrapper>
-          }
-        />
-        <Route
-          path="/releases/:releaseId"
-          element={
-            <ScreenWrapper>
-              <Release />
-            </ScreenWrapper>
-          }
-        />
-        <Route
-          path="/folders"
-          element={
-            <ScreenWrapper>
-              <Folders />
-            </ScreenWrapper>
-          }
-        />
-        <Route
-          path="/folders/:folderId"
-          element={
-            <ScreenWrapper>
-              <Folder />
-            </ScreenWrapper>
-          }
-        />
+        <Route path="/" element={<ScreenWrapper />}>
+          <Route path="/search" element={<Search />} />
+          <Route path="/artists/:artistId" element={<Artist />} />
+          <Route path="/releases/:releaseId" element={<Release />} />
+          <Route path="/folders" element={<Folders />} />
+          <Route path="/folders/:folderId" element={<Folder />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </Grommet>

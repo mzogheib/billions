@@ -1,18 +1,14 @@
 import React, { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 import ScreenWrapperUI from './ScreenWrapperUI'
 
-interface Props {
-  children: React.ReactNode
-}
-
-const ScreenWrapper: FC<Props> = ({ children }: Props) => {
+const ScreenWrapper: FC = () => {
   const navigate = useNavigate()
 
   return (
     <ScreenWrapperUI onBack={(): void => navigate(-1)}>
-      {children}
+      <Outlet />
     </ScreenWrapperUI>
   )
 }
